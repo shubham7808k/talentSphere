@@ -3,47 +3,124 @@ import React from 'react'
 const Login = () => {
   return (
     <div>
-      <>
-  {/* Design by foolishdeveloper.com */}
-  <title>Glassmorphism login Form Tutorial in html css</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap"
-    rel="stylesheet"
-  />
-  {/*Stylesheet*/}
-  <style
-    media="screen"
-    dangerouslySetInnerHTML={{
-      __html:
-        "\n      *,\n*:before,\n*:after{\n    padding: 0;\n    margin: 0;\n    box-sizing: border-box;\n}\nbody{\n    background-color: #080710;\n}\n.background{\n    width: 430px;\n    height: 520px;\n    position: absolute;\n    transform: translate(-50%,-50%);\n    left: 50%;\n    top: 50%;\n}\n.background .shape{\n    height: 200px;\n    width: 200px;\n    position: absolute;\n    border-radius: 50%;\n}\n.shape:first-child{\n    background: linear-gradient(\n        #1845ad,\n        #23a2f6\n    );\n    left: -80px;\n    top: -80px;\n}\n.shape:last-child{\n    background: linear-gradient(\n        to right,\n        #ff512f,\n        #f09819\n    );\n    right: -30px;\n    bottom: -80px;\n}\nform{\n    height: 520px;\n    width: 400px;\n    background-color: rgba(255,255,255,0.13);\n    position: absolute;\n    transform: translate(-50%,-50%);\n    top: 50%;\n    left: 50%;\n    border-radius: 10px;\n    backdrop-filter: blur(10px);\n    border: 2px solid rgba(255,255,255,0.1);\n    box-shadow: 0 0 40px rgba(8,7,16,0.6);\n    padding: 50px 35px;\n}\nform *{\n    font-family: 'Poppins',sans-serif;\n    color: #ffffff;\n    letter-spacing: 0.5px;\n    outline: none;\n    border: none;\n}\nform h3{\n    font-size: 32px;\n    font-weight: 500;\n    line-height: 42px;\n    text-align: center;\n}\n\nlabel{\n    display: block;\n    margin-top: 30px;\n    font-size: 16px;\n    font-weight: 500;\n}\ninput{\n    display: block;\n    height: 50px;\n    width: 100%;\n    background-color: rgba(255,255,255,0.07);\n    border-radius: 3px;\n    padding: 0 10px;\n    margin-top: 8px;\n    font-size: 14px;\n    font-weight: 300;\n}\n::placeholder{\n    color: #e5e5e5;\n}\nbutton{\n    margin-top: 50px;\n    width: 100%;\n    background-color: #ffffff;\n    color: #080710;\n    padding: 15px 0;\n    font-size: 18px;\n    font-weight: 600;\n    border-radius: 5px;\n    cursor: pointer;\n}\n.social{\n  margin-top: 30px;\n  display: flex;\n}\n.social div{\n  background: red;\n  width: 150px;\n  border-radius: 3px;\n  padding: 5px 10px 10px 5px;\n  background-color: rgba(255,255,255,0.27);\n  color: #eaf0fb;\n  text-align: center;\n}\n.social div:hover{\n  background-color: rgba(255,255,255,0.47);\n}\n.social .fb{\n  margin-left: 25px;\n}\n.social i{\n  margin-right: 4px;\n}\n\n    "
-    }}
-  />
-  <div className="background">
-    <div className="shape" />
-    <div className="shape" />
-  </div>
-  <form>
-    <h3>Login Here</h3>
-    <label htmlFor="username">Username</label>
-    <input type="text" placeholder="Email or Phone" id="username" />
-    <label htmlFor="password">Password</label>
-    <input type="password" placeholder="Password" id="password" />
-    <button>Log In</button>
-    <div className="social">
-      <div className="go">
-        <i className="fab fa-google" /> Google
-      </div>
-      <div className="fb">
-        <i className="fab fa-facebook" /> Facebook
+      <div
+  id="login-popup"
+  tabIndex={-1}
+  className="bg-black/50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 h-full items-center justify-center flex"
+>
+  <div className="relative p-4 w-full max-w-md h-full md:h-auto">
+    <div className="relative bg-white rounded-lg shadow">
+      <button
+        type="button"
+        className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center popup-close"
+      >
+        <svg
+          aria-hidden="true"
+          className="w-5 h-5"
+          fill="#c6c7c7"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fillRule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            cliprule="evenodd"
+          />
+        </svg>
+        <span className="sr-only">Close popup</span>
+      </button>
+      <div className="p-5">
+        <h3 className="text-2xl mb-0.5 font-medium" />
+        <p className="mb-4 text-sm font-normal text-gray-800" />
+        <div className="text-center">
+          <p className="mb-3 text-2xl font-semibold leading-5 text-slate-900">
+            Login to your account
+          </p>
+          <p className="mt-2 text-sm leading-4 text-slate-600">
+            You must be logged in to perform this action.
+          </p>
+        </div>
+        <div className="mt-7 flex flex-col gap-2">
+          <button className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
+            <img
+              src="https://www.svgrepo.com/show/512317/github-142.svg"
+              alt="GitHub"
+              className="h-[18px] w-[18px] "
+            />
+            Continue with GitHub
+          </button>
+          <button className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
+            <img
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              alt="Google"
+              className="h-[18px] w-[18px] "
+            />
+            Continue with Google
+          </button>
+          <button className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
+            <img
+              src="https://www.svgrepo.com/show/448234/linkedin.svg"
+              alt="Google"
+              className="h-[18px] w-[18px] "
+            />
+            Continue with LinkedIn
+          </button>
+        </div>
+        <div className="flex w-full items-center gap-2 py-6 text-sm text-slate-600">
+          <div className="h-px w-full bg-slate-200" />
+          OR
+          <div className="h-px w-full bg-slate-200" />
+        </div>
+        <form className="w-full">
+          <label htmlFor="email" className="sr-only">
+            Email address
+          </label>
+          <input
+            name="email"
+            type="email"
+            autoComplete="email"
+            required=""
+            className="block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1"
+            placeholder="Email Address"
+            defaultValue=""
+          />
+          <label htmlFor="password" className="sr-only">
+            Password
+          </label>
+          <input
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            required=""
+            className="mt-2 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1"
+            placeholder="Password"
+            defaultValue=""
+          />
+          <p className="mb-3 mt-2 text-sm text-gray-500">
+            <a
+              href="/forgot-password"
+              className="text-blue-800 hover:text-blue-600"
+            >
+              Reset your password?
+            </a>
+          </p>
+          <button
+            type="submit"
+            className="inline-flex w-full items-center justify-center rounded-lg bg-black p-2 py-3 text-sm font-medium text-white outline-none focus:ring-2 focus:ring-black focus:ring-offset-1 disabled:bg-gray-400"
+          >
+            Continue
+          </button>
+        </form>
+        <div className="mt-6 text-center text-sm text-slate-600">
+          Don't have an account?
+          <a href="/signup" className="font-medium text-[#4285f4]">
+            Sign up
+          </a>
+        </div>
       </div>
     </div>
-  </form>
-</>
+  </div>
+</div>
 
     </div>
   )
