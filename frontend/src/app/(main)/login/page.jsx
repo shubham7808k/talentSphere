@@ -1,129 +1,106 @@
 import React from 'react'
 
-const Login = () => {
+const login = () => {
   return (
     <div>
-      <div
-  id="login-popup"
-  tabIndex={-1}
-  className="bg-black/50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 h-full items-center justify-center flex"
->
-  <div className="relative p-4 w-full max-w-md h-full md:h-auto">
-    <div className="relative bg-white rounded-lg shadow">
-      <button
-        type="button"
-        className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center popup-close"
-      >
-        <svg
-          aria-hidden="true"
-          className="w-5 h-5"
-          fill="#c6c7c7"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fillRule="evenodd"
-            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-            cliprule="evenodd"
+      <>
+  {/* source:https://codepen.io/owaiswiz/pen/jOPvEPB */}
+  <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
+    <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+      <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
+        <div>
+          <img
+            src="https://drive.google.com/uc?export=view&id=1MFiKAExRFF0-2YNpAZzIu1Sh52J8r16v"
+            className="w-mx-auto"
           />
-        </svg>
-        <span className="sr-only">Close popup</span>
-      </button>
-      <div className="p-5">
-        <h3 className="text-2xl mb-0.5 font-medium" />
-        <p className="mb-4 text-sm font-normal text-gray-800" />
-        <div className="text-center">
-          <p className="mb-3 text-2xl font-semibold leading-5 text-slate-900">
-            Login to your account
-          </p>
-          <p className="mt-2 text-sm leading-4 text-slate-600">
-            You must be logged in to perform this action.
-          </p>
         </div>
-        <div className="mt-7 flex flex-col gap-2">
-          <button className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
-            <img
-              src="https://www.svgrepo.com/show/512317/github-142.svg"
-              alt="GitHub"
-              className="h-[18px] w-[18px] "
-            />
-            Continue with GitHub
-          </button>
-          <button className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
-            <img
-              src="https://www.svgrepo.com/show/475656/google-color.svg"
-              alt="Google"
-              className="h-[18px] w-[18px] "
-            />
-            Continue with Google
-          </button>
-          <button className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
-            <img
-              src="https://www.svgrepo.com/show/448234/linkedin.svg"
-              alt="Google"
-              className="h-[18px] w-[18px] "
-            />
-            Continue with LinkedIn
-          </button>
+        <div className="mt-12 flex flex-col items-center">
+          <div className="w-full flex-1 mt-8">
+            <div className="flex flex-col items-center">
+              <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-slate-200 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+                <div className="bg-white p-2 rounded-full">
+                  <svg className="w-4" viewBox="0 0 533.5 544.3">
+                    <path
+                      d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
+                      fill="#4285f4"
+                    />
+                    <path
+                      d="M272.1 544.3c73.4 0 135.3-24.1 180.4-65.7l-87.7-68c-24.4 16.6-55.9 26-92.6 26-71 0-131.2-47.9-152.8-112.3H28.9v70.1c46.2 91.9 140.3 149.9 243.2 149.9z"
+                      fill="#34a853"
+                    />
+                    <path
+                      d="M119.3 324.3c-11.4-33.8-11.4-70.4 0-104.2V150H28.9c-38.6 76.9-38.6 167.5 0 244.4l90.4-70.1z"
+                      fill="#fbbc04"
+                    />
+                    <path
+                      d="M272.1 107.7c38.8-.6 76.3 14 104.4 40.8l77.7-77.7C405 24.6 339.7-.8 272.1 0 169.2 0 75.1 58 28.9 150l90.4 70.1c21.5-64.5 81.8-112.4 152.8-112.4z"
+                      fill="#ea4335"
+                    />
+                  </svg>
+                </div>
+                <span className="ml-4">Sign In with Google</span>
+              </button>
+            </div>
+            <div className="my-12 border-b text-center">
+              <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
+                Or sign In with Cartesian E-mail
+              </div>
+            </div>
+            <div className="mx-auto max-w-xs">
+              <input
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                type="email"
+                placeholder="Email"
+              />
+              <input
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                type="password"
+                placeholder="Password"
+              />
+              <button className="mt-5 tracking-wide font-semibold bg-slate-500 text-white-500 w-full py-4 rounded-lg hover:bg-slate-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                <svg
+                  className="w-6 h-6 -ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="8.5" cy={7} r={4} />
+                  <path d="M20 8v6M23 11h-6" />
+                </svg>
+                <span className="ml-">Sign In</span>
+              </button>
+              <p className="mt-6 text-xs text-gray-600 text-center">
+                I agree to abide by Cartesian Kinetics
+                <a href="#" className="border-b border-gray-500 border-dotted">
+                  Terms of Service
+                </a>
+                and its
+                <a href="#" className="border-b border-gray-500 border-dotted">
+                  Privacy Policy
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="flex w-full items-center gap-2 py-6 text-sm text-slate-600">
-          <div className="h-px w-full bg-slate-200" />
-          OR
-          <div className="h-px w-full bg-slate-200" />
-        </div>
-        <form className="w-full">
-          <label htmlFor="email" className="sr-only">
-            Email address
-          </label>
-          <input
-            name="email"
-            type="email"
-            autoComplete="email"
-            required=""
-            className="block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1"
-            placeholder="Email Address"
-            defaultValue=""
-          />
-          <label htmlFor="password" className="sr-only">
-            Password
-          </label>
-          <input
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            required=""
-            className="mt-2 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1"
-            placeholder="Password"
-            defaultValue=""
-          />
-          <p className="mb-3 mt-2 text-sm text-gray-500">
-            <a
-              href="/forgot-password"
-              className="text-blue-800 hover:text-blue-600"
-            >
-              Reset your password?
-            </a>
-          </p>
-          <button
-            type="submit"
-            className="inline-flex w-full items-center justify-center rounded-lg bg-black p-2 py-3 text-sm font-medium text-white outline-none focus:ring-2 focus:ring-black focus:ring-offset-1 disabled:bg-gray-400"
-          >
-            Continue
-          </button>
-        </form>
-        <div className="mt-6 text-center text-sm text-slate-600">
-          Don't have an account?
-          <a href="/signup" className="font-medium text-[#4285f4]">
-            Sign up
-          </a>
-        </div>
+      </div>
+      <div className="flex-1 bg-slate-200 text-center hidden lg:flex">
+        <div
+          className="w-full bg-contain bg-center"
+          style={{
+            backgroundImage:
+              'url("https://img.freepik.com/free-photo/abstract-minimal-concept-plant-shadows_23-2148835269.jpg?t=st=1742147754~exp=1742151354~hmac=5a3cfa9f5d79e011acc9f50075a5bba8b82d27668916380ebb235d2364375745&w=826")'
+          }}
+        ></div>
       </div>
     </div>
   </div>
-</div>
+</>
 
     </div>
   )
 }
 
-export default Login
+export default login
