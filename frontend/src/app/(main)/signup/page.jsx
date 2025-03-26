@@ -1,6 +1,24 @@
+'use client'
+import { useFormik} from 'formik'
 import React from 'react'
 
 const signup = () => {
+
+  const signupForm = useFormik({
+    initialValues: {
+      
+      email : '',
+      password : ''
+      
+    },
+    onSubmit: (values) => {
+      console.log(values);
+
+      // send values to backend
+
+    }
+  });
+
   return (
     <div>
       <>
@@ -59,14 +77,28 @@ const signup = () => {
               </div>
             </div>
             <div className="mx-auto max-w-xs">
+            <input
+                onChange={signupForm.handleChange}
+                value={signupForm.values.email}
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                type="text"
+                id='name'
+                placeholder="Name"
+              />
               <input
+                onChange={signupForm.handleChange}
+                value={signupForm.values.email}
                 className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                 type="email"
+                id='email'
                 placeholder="Email"
               />
               <input
+                onChange={signupForm.handleChange}
+                value={signupForm.values.password}
                 className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                 type="password"
+                id='password'
                 placeholder="Password"
               />
               <button className="mt-5 tracking-wide font-semibold bg-slate-500 text-black w-full py-4 rounded-lg hover:bg-slate-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
