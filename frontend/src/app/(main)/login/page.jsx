@@ -1,110 +1,106 @@
 import React from 'react'
 
-const Login = () => {
+const login = () => {
   return (
     <div>
-      <div className="bg-white py-6 sm:py-8 lg:py-12">
-        <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
-          <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl">
-            Login
-          </h2>
-          <form className="mx-auto max-w-lg rounded-lg border">
-            <div className="flex flex-col gap-4 p-4 md:p-8">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
-                >
-                  Email
-                </label>
-                <input
-                  name="email"
-                  className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="password"
-                  className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
-                >
-                  Password
-                </label>
-                <input
-                  name="password"
-                  className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-                />
-              </div>
-              <button className="block rounded-lg bg-gray-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-700 focus-visible:ring active:bg-gray-600 md:text-base">
-                Log in
-              </button>
-              <div className="relative flex items-center justify-center">
-                <span className="absolute inset-x-0 h-px bg-gray-300" />
-                <span className="relative bg-white px-4 text-sm text-gray-400">
-                  Log in with social
-                </span>
-              </div>
-              <button className="flex items-center justify-center gap-2 rounded-lg bg-blue-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-blue-300 transition duration-100 hover:bg-blue-600 focus-visible:ring active:bg-blue-700 md:text-base">
-                <svg
-                  className="h-5 w-5 shrink-0"
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 0C5.37273 0 0 5.37273 0 12C0 18.0164 4.43182 22.9838 10.2065 23.8516V15.1805H7.23764V12.0262H10.2065V9.92727C10.2065 6.45218 11.8996 4.92655 14.7878 4.92655C16.1711 4.92655 16.9025 5.02909 17.2489 5.076V7.82945H15.2787C14.0525 7.82945 13.6244 8.99182 13.6244 10.302V12.0262H17.2178L16.7302 15.1805H13.6244V23.8773C19.4815 23.0825 24 18.0747 24 12C24 5.37273 18.6273 0 12 0Z"
-                    fill="white"
-                  />
-                </svg>
-                Continue with Facebook
-              </button>
-              <button className="flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-gray-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base">
-                <svg
-                  className="h-5 w-5 shrink-0"
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M23.7449 12.27C23.7449 11.48 23.6749 10.73 23.5549 10H12.2549V14.51H18.7249C18.4349 15.99 17.5849 17.24 16.3249 18.09V21.09H20.1849C22.4449 19 23.7449 15.92 23.7449 12.27Z"
-                    fill="#4285F4"
-                  />
-                  <path
-                    d="M12.2549 24C15.4949 24 18.2049 22.92 20.1849 21.09L16.3249 18.09C15.2449 18.81 13.8749 19.25 12.2549 19.25C9.12492 19.25 6.47492 17.14 5.52492 14.29H1.54492V17.38C3.51492 21.3 7.56492 24 12.2549 24Z"
-                    fill="#34A853"
-                  />
-                  <path
-                    d="M5.52488 14.29C5.27488 13.57 5.14488 12.8 5.14488 12C5.14488 11.2 5.28488 10.43 5.52488 9.71V6.62H1.54488C0.724882 8.24 0.254883 10.06 0.254883 12C0.254883 13.94 0.724882 15.76 1.54488 17.38L5.52488 14.29Z"
-                    fill="#FBBC05"
-                  />
-                  <path
-                    d="M12.2549 4.75C14.0249 4.75 15.6049 5.36 16.8549 6.55L20.2749 3.13C18.2049 1.19 15.4949 0 12.2549 0C7.56492 0 3.51492 2.7 1.54492 6.62L5.52492 9.71C6.47492 6.86 9.12492 4.75 12.2549 4.75Z"
-                    fill="#EA4335"
-                  />
-                </svg>
-                Continue with Google
+      <>
+  {/* source:https://codepen.io/owaiswiz/pen/jOPvEPB */}
+  <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
+    <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+      <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
+        <div>
+          <img
+            src="https://drive.google.com/uc?export=view&id=1MFiKAExRFF0-2YNpAZzIu1Sh52J8r16v"
+            className="w-mx-auto"
+          />
+        </div>
+        <div className="mt-12 flex flex-col items-center">
+          <div className="w-full flex-1 mt-8">
+            <div className="flex flex-col items-center">
+              <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-slate-200 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+                <div className="bg-white p-2 rounded-full">
+                  <svg className="w-4" viewBox="0 0 533.5 544.3">
+                    <path
+                      d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
+                      fill="#4285f4"
+                    />
+                    <path
+                      d="M272.1 544.3c73.4 0 135.3-24.1 180.4-65.7l-87.7-68c-24.4 16.6-55.9 26-92.6 26-71 0-131.2-47.9-152.8-112.3H28.9v70.1c46.2 91.9 140.3 149.9 243.2 149.9z"
+                      fill="#34a853"
+                    />
+                    <path
+                      d="M119.3 324.3c-11.4-33.8-11.4-70.4 0-104.2V150H28.9c-38.6 76.9-38.6 167.5 0 244.4l90.4-70.1z"
+                      fill="#fbbc04"
+                    />
+                    <path
+                      d="M272.1 107.7c38.8-.6 76.3 14 104.4 40.8l77.7-77.7C405 24.6 339.7-.8 272.1 0 169.2 0 75.1 58 28.9 150l90.4 70.1c21.5-64.5 81.8-112.4 152.8-112.4z"
+                      fill="#ea4335"
+                    />
+                  </svg>
+                </div>
+                <span className="ml-4">Sign In with Google</span>
               </button>
             </div>
-            <div className="flex items-center justify-center bg-gray-100 p-4">
-              <p className="text-center text-sm text-gray-500">
-                Don't have an account?{" "}
-                <a
-                  href="#"
-                  className="text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700"
+            <div className="my-12 border-b text-center">
+              <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
+                Or sign In with Cartesian E-mail
+              </div>
+            </div>
+            <div className="mx-auto max-w-xs">
+              <input
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                type="email"
+                placeholder="Email"
+              />
+              <input
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                type="password"
+                placeholder="Password"
+              />
+              <button className="mt-5 tracking-wide font-semibold bg-slate-500 text-white-500 w-full py-4 rounded-lg hover:bg-slate-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                <svg
+                  className="w-6 h-6 -ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  Register
+                  <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                  <circle cx="8.5" cy={7} r={4} />
+                  <path d="M20 8v6M23 11h-6" />
+                </svg>
+                <span className="ml-">Sign In</span>
+              </button>
+              <p className="mt-6 text-xs text-gray-600 text-center">
+                I agree to abide by Cartesian Kinetics
+                <a href="#" className="border-b border-gray-500 border-dotted">
+                  Terms of Service
+                </a>
+                and its
+                <a href="#" className="border-b border-gray-500 border-dotted">
+                  Privacy Policy
                 </a>
               </p>
             </div>
-          </form>
+          </div>
         </div>
       </div>
+      <div className="flex-1 bg-slate-200 text-center hidden lg:flex">
+        <div
+          className="w-full bg-contain bg-center"
+          style={{
+            backgroundImage:
+              'url("https://img.freepik.com/free-photo/abstract-minimal-concept-plant-shadows_23-2148835269.jpg?t=st=1742147754~exp=1742151354~hmac=5a3cfa9f5d79e011acc9f50075a5bba8b82d27668916380ebb235d2364375745&w=826")'
+          }}
+        ></div>
+      </div>
+    </div>
+  </div>
+</>
 
     </div>
   )
 }
 
-export default Login
+export default login
