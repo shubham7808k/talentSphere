@@ -1,15 +1,34 @@
 'use client'
 import { useFormik} from 'formik'
 import React from 'react'
+import * as Yup from 'yup';
+
+const SignupSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string()
+    .required('Required')
+    .min(8, 'Password is too short - should be 8 chars minimum.')
+    .matches( /[a-z]/ , 'Lowercase is required')
+    .matches( /[A-Z]/ , 'Uppercase is required')
+    .matches( /[0-9]/ , 'Number is required')
+    .matches( /[\W]/ , 'Special character is required'),
+  confirmPassword: Yup.string()
+    .required('Required')
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')    
+});
 
 const signup = () => {
 
   const signupForm = useFormik({
     initialValues: {
-      
+      name : '',
       email : '',
-      password : ''
-      
+      password : '',
+      confirmPassword : ''
     },
     onSubmit: (values) => {
       console.log(values);
@@ -27,10 +46,7 @@ const signup = () => {
     <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
       <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
         <div>
-          <img
-            src="https://storage.googleapis.com/devitary-image-host.appspot.com/15846435184459982716-LogoMakr_7POjrN.png"
-            className="w-32 mx-auto"
-          />
+          <h1 class="text-3xl w-32 mx-auto font-bold text-indigo-600">TalentSphere</h1>
         </div>
         <div className="mt-12 flex flex-col items-center">
           <h1 className="text-2xl xl:text-3xl font-extrabold">Sign up</h1>
@@ -77,30 +93,66 @@ const signup = () => {
               </div>
             </div>
             <div className="mx-auto max-w-xs">
-            <input
-                onChange={signupForm.handleChange}
-                value={signupForm.values.email}
-                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+            {/*<input
                 type="text"
-                id='name'
+                id="name"
                 placeholder="Name"
+                onChange={signupForm.handleChange}
+                value={signupForm.values.name}
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"               
               />
+              {
+                ( signupForm.touched.name && signupForm.errors.name ) && (
+                  <p className='text-xs text-red-600 mt-2'>
+                    {signupForm.errors.name}
+                  </p>
+                )
+              }*/}
               <input
+                type="email"
+                id="email"
+                placeholder="Email"
                 onChange={signupForm.handleChange}
                 value={signupForm.values.email}
                 className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                type="email"
-                id='email'
-                placeholder="Email"
               />
+              {
+                ( signupForm.touched.email && signupForm.errors.email ) && (
+                  <p className='text-xs text-red-600 mt-2'>
+                    {signupForm.errors.email}
+                  </p>
+                )
+              }
               <input
+                type="password"
+                id="password"
+                placeholder="Password"
                 onChange={signupForm.handleChange}
                 value={signupForm.values.password}
                 className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                type="password"
-                id='password'
-                placeholder="Password"
               />
+              {
+                ( signupForm.touched.password && signupForm.errors.password ) && (
+                  <p className='text-xs text-red-600 mt-2'>
+                    {signupForm.errors.password}
+                  </p>
+                )
+              }
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                onChange={signupForm.handleChange}
+                value={signupForm.values.confirmPassword}
+                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+              />
+              {
+                ( signupForm.touched.confirmPassword && signupForm.errors.confirmPassword ) && (
+                  <p className='text-xs text-red-600 mt-2'>
+                    {signupForm.errors.confirmPassword}
+                  </p>
+                )
+              }
               <button className="mt-5 tracking-wide font-semibold bg-slate-500 text-black w-full py-4 rounded-lg hover:bg-slate-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                 <svg
                   className="w-6 h-6 -ml-2"
