@@ -3,10 +3,10 @@ import React from 'react'
 const about = () => {
   return (
     <div>
-      <div className="sm:flex items-center max-w-screen-xl">
+      <div className="sm:flex items-center max-w-screen-xl mx-auto">
   <div className="sm:w-1/2 p-10">
     <div className="image object-center text-center">
-      <img src="https://i.imgur.com/WbQnbas.png" />
+      <img src="https://blog.flipbuilder.com/wp-content/uploads/2024/01/Photography-Portfolio-Template.png" />
     </div>
   </div>
   <div className="sm:w-1/2 p-5">
@@ -15,12 +15,10 @@ const about = () => {
         About us
       </span>
       <h2 className="my-4 font-bold text-3xl  sm:text-4xl ">
-        About <span className="text-indigo-600">Our Company</span>
+        About <span className="text-indigo-600">Our Website</span>
       </h2>
       <p className="text-gray-700">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid,
-        commodi doloremque, fugiat illum magni minus nisi nulla numquam
-        obcaecati placeat quia, repellat tempore voluptatum.
+      TalentSphere is an AI-powered portfolio builder designed to help professionals, students, freelancers, and job seekers create visually appealing and structured online portfolios without requiring coding or design skills. Our platform leverages automation, AI-driven content organization, and seamless integrations to simplify the portfolio-building process.
       </p>
     </div>
   </div>

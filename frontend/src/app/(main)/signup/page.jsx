@@ -46,7 +46,7 @@ const signup = () => {
     <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
       <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
         <div>
-          <h1 class="text-3xl w-32 mx-auto font-bold text-indigo-600">TalentSphere</h1>
+          <h1 class="text-3xl w-32 mx-auto font-bold text-slate-800">TalentSphere</h1>
         </div>
         <div className="mt-12 flex flex-col items-center">
           <h1 className="text-2xl xl:text-3xl font-extrabold">Sign up</h1>
@@ -169,11 +169,11 @@ const signup = () => {
                 <span className="ml-3">Sign Up</span>
               </button>
               <p className="mt-6 text-xs text-gray-600 text-center">
-                I agree to abide by templatana's
+                I agree to abide by talentsphere&nbsp;
                 <a href="#" className="border-b border-gray-500 border-dotted">
                   Terms of Service
                 </a>
-                and its
+                &nbsp; and its &nbsp;
                 <a href="#" className="border-b border-gray-500 border-dotted">
                   Privacy Policy
                 </a>
