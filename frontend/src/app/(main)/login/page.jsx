@@ -9,10 +9,11 @@ const login = () => {
     <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
       <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
         <div>
-          <img
+          {/*<img
             src="https://drive.google.com/uc?export=view&id=1MFiKAExRFF0-2YNpAZzIu1Sh52J8r16v"
             className="w-mx-auto"
-          />
+          />*/}
+          <h1 class="text-3xl w-32 mx-auto font-bold text-slate-800">TalentSphere</h1>
         </div>
         <div className="mt-12 flex flex-col items-center">
           <div className="w-full flex-1 mt-8">
@@ -43,7 +44,7 @@ const login = () => {
             </div>
             <div className="my-12 border-b text-center">
               <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
-                Or sign In with Cartesian E-mail
+                Or sign In with e-mail
               </div>
             </div>
             <div className="mx-auto max-w-xs">
@@ -73,11 +74,11 @@ const login = () => {
                 <span className="ml-">Sign In</span>
               </button>
               <p className="mt-6 text-xs text-gray-600 text-center">
-                I agree to abide by Cartesian Kinetics
+                I agree to abide by talentsphere &nbsp;
                 <a href="#" className="border-b border-gray-500 border-dotted">
                   Terms of Service
                 </a>
-                and its
+                &nbsp; and its &nbsp;
                 <a href="#" className="border-b border-gray-500 border-dotted">
                   Privacy Policy
                 </a>

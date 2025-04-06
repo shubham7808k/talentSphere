@@ -6,18 +6,31 @@ const contact = () => {
       <form action="https://fabform.io/f/xxxxx" method="post">
   <section className="py-24">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h1 className="font-manrope text-black text-4xl font-extrabold leading-10 absolute top-11 mb-11 lg:mb-0 mx-auto text-center">  
+                Contact us
+      </h1>
       <div className="grid lg:grid-cols-2 grid-cols-1">
         <div className="lg:mb-0 mb-10">
           <div className="group w-full h-full">
             <div className="relative h-full">
-              <img
+              {/*<img
                 src="https://pagedone.io/asset/uploads/1696488602.png"
                 alt="ContactUs tailwind section"
                 className="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply bg-indigo-700"
-              />
-              <h1 className="font-manrope text-white text-4xl font-bold leading-10 absolute top-11 left-11">
+              />*/}
+              <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13246.82965926419!2d80.93676538724002!3d26.785107196710083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfb787dfbbd53%3A0x93e8f520720a89e7!2sTelibagh%2C%20Lucknow%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1743143318337!5m2!1sen!2sin"
+            width={600}
+            height={450}
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply bg-indigo-700"
+          />
+              {/*<h1 className="font-manrope text-black text-4xl font-bold leading-10 absolute top-11 left-11">
                 Contact us
-              </h1>
+              </h1>*/}
               <div className="absolute bottom-0 w-full lg:p-11 p-5">
                 <div className="bg-white rounded-lg p-6 block">
                   <a href="javascript:;" className="flex items-center mb-6">
@@ -37,7 +50,7 @@ const contact = () => {
                       />
                     </svg>
                     <h5 className="text-black text-base font-normal leading-6 ml-5">
-                      470-601-1911
+                      123-123-1234
                     </h5>
                   </a>
                   <a
@@ -59,7 +72,7 @@ const contact = () => {
                       />
                     </svg>
                     <h5 className="text-black text-base font-normal leading-6 ml-5">
-                      https://veilmail.io/irish-geoff
+                      https://www.talentsphere.com
                     </h5>
                   </a>
                   <a href="javascript:;" className="flex items-center">
@@ -91,21 +104,24 @@ const contact = () => {
           </div>
         </div>
         <div className="bg-gray-50 p-5 lg:p-11 lg:rounded-r-2xl rounded-2xl">
-          <h2 className="text-indigo-600 font-manrope text-4xl font-semibold leading-10 mb-11">
+          <h2 className="text-slate-600 font-manrope text-4xl font-semibold leading-10 mb-11">
             Send Us A Message
           </h2>
           <input
             type="text"
+            id='name'
             className="w-full h-12 text-gray-600 placeholder-gray-400  shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
             placeholder="Name"
           />
           <input
             type="text"
+            id="email"
             className="w-full h-12 text-gray-600 placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
             placeholder="Email"
           />
           <input
             type="text"
+            id='phone'
             className="w-full h-12 text-gray-600 placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
             placeholder="Phone"
           />
@@ -151,7 +167,7 @@ const contact = () => {
             className="w-full h-12 text-gray-600 placeholder-gray-400 bg-transparent text-lg shadow-sm font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
             placeholder="Message"
           />
-          <button className="w-full h-12 text-white text-base font-semibold leading-6 rounded-full transition-all duration-700 hover:bg-indigo-800 bg-indigo-600 shadow-sm">
+          <button className="w-full h-12 text-white text-base font-semibold leading-6 rounded-full transition-all duration-700 hover:bg-slate-800 bg-slate-600 shadow-sm">
             Send
           </button>
         </div>
