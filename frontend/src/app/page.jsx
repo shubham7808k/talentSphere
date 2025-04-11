@@ -5,7 +5,8 @@ const Home = () => {
     <div>
       <>
   {/* nav bar section */}
-  <nav className="flex flex-wrap items-center justify-between p-3 bg-[#e8e8e5]">
+  <nav classNa
+  me="flex flex-wrap items-center justify-between p-3 bg-[#e8e8e5]">
     <div className="text-4xl font-extrabold">TalentSphere</div>
     <div className="flex md:hidden">
       <button id="hamburger">
