@@ -11,8 +11,9 @@
   "dependencies": {
     "@tabler/icons-react": "^3.31.0",
     "@tailus/themer": "^0.1.8",
-    "axios": "^1.8.2",
+    "axios": "^1.8.4",
     "formik": "^2.4.6",
+    "ldrs": "^1.1.6",
     "lucide-react": "^0.483.0",
     "next": "15.2.1",
     "react": "^19.0.0",
