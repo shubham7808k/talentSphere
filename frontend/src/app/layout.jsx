@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       >
         <PrelineScript />
         <Toaster />
-        <Navbar />
+        
         {children}
       </body>
     </html>
