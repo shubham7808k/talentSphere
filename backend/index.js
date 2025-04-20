@@ -2,17 +2,16 @@ require('dotenv').config();
 
 //impport express
 const express = require('express');
-const mongoose = require('mongoose');
 const multer = require("multer");
 const cors = require('cors'); 
-const Userrouter = require('./routers/UserRouter');
+const Userrouter = require('./routers/Userrouter');
 const pdf = require("pdf-parse");
 const fs = require("fs");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const upload = multer({ dest: "uploads/" });
 
-const genAI = new GoogleGenerativeAI("Your_Gemini_Key");
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 //initialize express
