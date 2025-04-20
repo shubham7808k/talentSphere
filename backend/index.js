@@ -4,7 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const multer = require("multer");
 const cors = require('cors'); 
-const Userrouter = require('./routers/Userrouter');
+const Userrouter = require('./routers/userRouter');
 const pdf = require("pdf-parse");
 const fs = require("fs");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
