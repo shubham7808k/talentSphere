@@ -53,8 +53,8 @@ const Login = () => {
                 {/*<img
             src="https://drive.google.com/uc?export=view&id=1MFiKAExRFF0-2YNpAZzIu1Sh52J8r16v"
             className="w-mx-auto"
-          />*/}
-                <h1 class="text-3xl w-32 mx-auto font-bold text-slate-800">TalentSphere</h1>
+          />
+                <h1 class="text-3xl w-32 mx-auto font-bold text-slate-800">TalentSphere</h1>*/}
               </div>
               <div className="mt-12 flex flex-col items-center">
                 <div className="w-full flex-1 mt-8">

@@ -10,19 +10,19 @@ const Home = () => {
 
         {/* hero seciton */}
         <div className="relative w-full h-[320px]" id="home">
-          <div className="absolute inset-0 opacity-80">
+          <div className="absolute inset-0">
             <img
-              src="https://static.wixstatic.com/media/5af200_b7e6f7d7e4044fc3902e910ffed572a5~mv2.png/v1/fill/w_980,h_674,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/5af200_b7e6f7d7e4044fc3902e910ffed572a5~mv2.png"
+              src="https://img.freepik.com/free-photo/flat-lay-workstation-with-copy-space-laptop_23-2148430879.jpg?semt=ais_hybrid&w=740"
               alt="Background Image"
               className="object-cover object-center w-full h-full"
             />
           </div>
           <div className="absolute inset-9 flex flex-col md:flex-row items-center justify-between">
             <div className="md:w-1/2 mb-4 md:mb-0">
-              <h1 className="text-grey-700 font-extrabold text-4xl md:text-5xl leading-tight mb-2">
+              <h1 className="text-pink-50 text-pretty lg:font-extrabold md:font-bold text-4xl md:text-5xl sm:text-2xl leading-tight mb-2">
                 Transform your talent into a visual story
               </h1>
-              <p className="font-regular text-xl mb-8 mt-4 font-bold">
+              <p className="font-regular text-pink-50 text-xl mb-8 mt-4 font-bold">
                 Smart AI transforms your resume into a stunning portfolio with zero effort.
               </p>
               <a
