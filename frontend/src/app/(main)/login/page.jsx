@@ -50,17 +50,16 @@ const Login = () => {
           <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
             <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
               <div>
-                {/*<img
-            src="https://drive.google.com/uc?export=view&id=1MFiKAExRFF0-2YNpAZzIu1Sh52J8r16v"
-            className="w-mx-auto"
-          />
-                <h1 class="text-3xl w-32 mx-auto font-bold text-slate-800">TalentSphere</h1>*/}
+                <h1 className="text-3xl w-32 mx-auto font-bold text-slate-800 flex justify-center ">Login</h1>
               </div>
               <div className="mt-12 flex flex-col items-center">
                 <div className="w-full flex-1 mt-8">
+                
                   <div className="flex flex-col items-center">
+                  
                     <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-slate-200 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
                       <div className="bg-white p-2 rounded-full">
+                        
                         <svg className="w-4" viewBox="0 0 533.5 544.3">
                           <path
                             d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
