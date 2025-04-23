@@ -88,65 +88,67 @@ const Login = () => {
                       Or sign In with e-mail
                     </div>
                   </div>
-                  <div className="mx-auto max-w-xs">
-                    <input
-                      className={`w-full ${formik.touched.email && formik.errors.email
-                        ? 'border-red-500 bg-red-50'
-                        : 'bg-gray-50'
-                        } px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white`}
-                      id='email'
-                      name='email'
-                      type="email"
-                      placeholder="Email"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.email}
-                    />
-                    {formik.touched.email && formik.errors.email ? (
-                      <div className="text-red-500 text-sm mt-1">{formik.errors.email}</div>
-                    ) : null}
-                    <input
-                      className={`w-full ${formik.touched.password && formik.errors.password
-                        ? 'border-red-500 bg-red-50'
-                        : 'bg-gray-50'
-                        } px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5`}
-                      id='password'
-                      name='password'
-                      type="password"
-                      placeholder="Password"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.password}
-                    />
-                    {formik.touched.password && formik.errors.password ? (
-                      <div className="text-red-500 text-sm mt-1">{formik.errors.password}</div>
-                    ) : null}
-                    <button className="mt-5 tracking-wide font-semibold bg-slate-500 text-white-500 w-full py-4 rounded-lg hover:bg-slate-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                      <svg
-                        className="w-6 h-6 -ml-2"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                        <circle cx="8.5" cy={7} r={4} />
-                        <path d="M20 8v6M23 11h-6" />
-                      </svg>
-                      <span className="ml-">Sign In</span>
-                    </button>
-                    <p className="mt-6 text-xs text-gray-600 text-center">
-                      I agree to abide by talentsphere &nbsp;
-                      <a href="#" className="border-b border-gray-500 border-dotted">
-                        Terms of Service
-                      </a>
-                      &nbsp; and its &nbsp;
-                      <a href="#" className="border-b border-gray-500 border-dotted">
-                        Privacy Policy
-                      </a>
-                    </p>
-                  </div>
+                  <form onSubmit={formik.handleSubmit}>
+                    <div className="mx-auto max-w-xs">
+                      <input
+                        className={`w-full ${formik.touched.email && formik.errors.email
+                          ? 'border-red-500 bg-red-50'
+                          : 'bg-gray-50'
+                          } px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white`}
+                        id='email'
+                        name='email'
+                        type="email"
+                        placeholder="Email"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.email}
+                      />
+                      {formik.touched.email && formik.errors.email ? (
+                        <div className="text-red-500 text-sm mt-1">{formik.errors.email}</div>
+                      ) : null}
+                      <input
+                        className={`w-full ${formik.touched.password && formik.errors.password
+                          ? 'border-red-500 bg-red-50'
+                          : 'bg-gray-50'
+                          } px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5`}
+                        id='password'
+                        name='password'
+                        type="password"
+                        placeholder="Password"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
+                      />
+                      {formik.touched.password && formik.errors.password ? (
+                        <div className="text-red-500 text-sm mt-1">{formik.errors.password}</div>
+                      ) : null}
+                      <button className="mt-5 tracking-wide font-semibold bg-slate-500 text-white-500 w-full py-4 rounded-lg hover:bg-slate-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                        <svg
+                          className="w-6 h-6 -ml-2"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                          <circle cx="8.5" cy={7} r={4} />
+                          <path d="M20 8v6M23 11h-6" />
+                        </svg>
+                        <span className="ml-">Sign In</span>
+                      </button>
+                      <p className="mt-6 text-xs text-gray-600 text-center">
+                        I agree to abide by talentsphere &nbsp;
+                        <a href="#" className="border-b border-gray-500 border-dotted">
+                          Terms of Service
+                        </a>
+                        &nbsp; and its &nbsp;
+                        <a href="#" className="border-b border-gray-500 border-dotted">
+                          Privacy Policy
+                        </a>
+                      </p>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
