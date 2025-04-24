@@ -2,8 +2,8 @@
 import { useFormik } from 'formik'
 import React from 'react'
 import * as Yup from 'yup';
-import { Cardio } from 'ldrs/react'
-import 'ldrs/react/Cardio.css'
+import { LineSpinner } from 'ldrs/react'
+import 'ldrs/react/LineSpinner.css'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -196,11 +196,11 @@ const Signup = () => {
 
                         {
                           signupForm.isSubmitting ? (
-                            // Default values shown
-                            <Cardio
+                           // Default values shown
+                            <LineSpinner
                               size="50"
-                              stroke="4"
-                              speed="2"
+                              stroke="3"
+                              speed="1"
                               color="white"
                             />
                           ) : "Sign Up"
