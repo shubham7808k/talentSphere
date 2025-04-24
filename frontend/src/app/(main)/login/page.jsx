@@ -54,12 +54,12 @@ const Login = () => {
               </div>
               <div className="mt-12 flex flex-col items-center">
                 <div className="w-full flex-1 mt-8">
-                
+
                   <div className="flex flex-col items-center">
-                  
+
                     <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-slate-200 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
                       <div className="bg-white p-2 rounded-full">
-                        
+
                         <svg className="w-4" viewBox="0 0 533.5 544.3">
                           <path
                             d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
@@ -121,7 +121,7 @@ const Login = () => {
                       {formik.touched.password && formik.errors.password ? (
                         <div className="text-red-500 text-sm mt-1">{formik.errors.password}</div>
                       ) : null}
-                      <button className="mt-5 tracking-wide font-semibold bg-slate-500 text-white-500 w-full py-4 rounded-lg hover:bg-slate-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                      <button type='submit' className="mt-5 tracking-wide font-semibold bg-slate-500 text-white-500 w-full py-4 rounded-lg hover:bg-slate-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                         <svg
                           className="w-6 h-6 -ml-2"
                           fill="none"
@@ -134,7 +134,7 @@ const Login = () => {
                           <circle cx="8.5" cy={7} r={4} />
                           <path d="M20 8v6M23 11h-6" />
                         </svg>
-                        <span className="ml-">Sign In</span>
+                        <span className="">Sign In</span>
                       </button>
                       <p className="mt-6 text-xs text-gray-600 text-center">
                         I agree to abide by talentsphere &nbsp;

@@ -4,7 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const multer = require("multer");
 const cors = require('cors'); 
-const Userrouter = require('./routers/userRouter');
+const UserRouter = require('./routers/userRouter');
 const pdf = require("pdf-parse");
 const fs = require("fs");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
@@ -21,7 +21,7 @@ const port = process.env.PORT || 5000;
 //middleware
 app.use(cors());
 app.use(express.json());
-app.use('/user', Userrouter);
+app.use('/user', UserRouter);
 
 //endpoint or route
 app.get('/', (req, res) => {

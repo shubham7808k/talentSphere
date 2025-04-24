@@ -1,5 +1,6 @@
 const express = require('express');
 const  UserModel  = require('../models/UserModel');
+const jwt=require('jsonwebtoken')
 
 const router = express.Router();
 
@@ -96,7 +97,7 @@ router.put('/update/:id', (req, res) => {
 
 router.post('/authenticate', (req, res) => {
 
-    Model.findOne(req.body)
+    UserModel.findOne(req.body)
         .then((result) => {
 
             if (result) {
