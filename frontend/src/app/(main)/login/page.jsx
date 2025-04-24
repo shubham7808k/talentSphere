@@ -134,11 +134,7 @@ const Login = () => {
                           <circle cx="8.5" cy={7} r={4} />
                           <path d="M20 8v6M23 11h-6" />
                         </svg>
-<<<<<<< HEAD
-                        <span className="">Sign In</span>
-=======
                         <span type="submit" className="ml-">Sign In</span>
->>>>>>> 7907ef68773cce6743502c4a31fcf3c051f91335
                       </button>
                       <p className="mt-6 text-xs text-gray-600 text-center">
                         I agree to abide by talentsphere &nbsp;
