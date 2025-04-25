@@ -4,6 +4,8 @@ import axios from 'axios';
 import Portfolio from '@/app/portfolio/page';
 import Portfolio2 from '@/app/portfolio2/page';
 import Portfolio3 from '@/app/portfolio3/page';
+import Portfolio4 from '@/app/portfolio4/page';
+import Portfolio5 from '@/app/portfolio5/page';
 
 const Page = () => {
   const [file, setFile] = useState(null);   //check is file upload or not
@@ -67,12 +69,14 @@ const Page = () => {
       Portfolio: '/portfolio',
       Portfolio2: '/portfolio2',
       Portfolio3: '/portfolio3',
+      Portfolio4: '/portfolio4',
+      Portfolio5: '/portfolio5'
     };
     window.open(templateUrls[selectedTemplate], '_blank');
   };
 
   const switchTemplate = () => {
-    const templates = ['Portfolio', 'Portfolio2', 'Portfolio3'];
+    const templates = ['Portfolio', 'Portfolio2', 'Portfolio3','Portfolio4', 'Portfolio5'];
     const currentIndex = templates.indexOf(selectedTemplate);
     const newTemplate = templates[(currentIndex + 1) % templates.length];
 
@@ -108,6 +112,8 @@ const Page = () => {
               {selectedTemplate === 'Portfolio' && <Portfolio portfolioData={portfolioData} />}
               {selectedTemplate === 'Portfolio2' && <Portfolio2 portfolioData={portfolioData} />}
               {selectedTemplate === 'Portfolio3' && <Portfolio3 portfolioData={portfolioData} />}
+              {selectedTemplate === 'Portfolio4' && <Portfolio4 portfolioData={portfolioData} />}
+              {selectedTemplate === 'Portfolio5' && <Portfolio5 portfolioData={portfolioData} />}
             </div>
           )}
         </div>
