@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "framer-motion": "^12.9.2"
+    "jsonwebtoken": "^9.0.2"
   }
 }
