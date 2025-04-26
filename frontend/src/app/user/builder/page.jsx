@@ -43,7 +43,7 @@ const Page = () => {
     const formData = new FormData();
     formData.append('pdf', file);
 
-    axios.post('http://localhost:5000/upload-pdf', formData, {
+    axios.post('http://localhost:5500/upload-pdf', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
