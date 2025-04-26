@@ -198,7 +198,7 @@ const Signup = () => {
                           signupForm.isSubmitting ? (
                            // Default values shown
                             <LineSpinner
-                              size="50"
+                              size="30"
                               stroke="3"
                               speed="1"
                               color="white"
