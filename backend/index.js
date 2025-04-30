@@ -4,10 +4,14 @@ require('dotenv').config();
 const express = require('express');
 const multer = require("multer");
 const cors = require('cors'); 
-const UserRouter = require('./routers/userRouter');
+
 const pdf = require("pdf-parse");
 const fs = require("fs");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+const UserRouter = require('./routers/userRouter');
+const portfolioRouter = require('./routers/portfolioRouter');
+
 
 const upload = multer({ dest: "uploads/" });
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -20,7 +24,11 @@ const port = process.env.PORT || 5000;
 //middleware
 app.use(cors());
 app.use(express.json());
+
+//router
 app.use('/user', UserRouter);
+app.use('/api/portfolio', portfolioRouter);     
+
 
 //endpoint or route
 app.get('/', (req, res) => {
