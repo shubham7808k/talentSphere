@@ -9,7 +9,7 @@ import Portfolio5 from '@/app/portfolio5/page';
 import Portfolio6 from '@/app/portfolio6/page'; 
 
 
-const Page = () => {
+const Page = () => {   
   const [file, setFile] = useState(null);   //check is file upload or not
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
