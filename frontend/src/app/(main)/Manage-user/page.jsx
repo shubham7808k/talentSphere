@@ -7,15 +7,12 @@ import toast from 'react-hot-toast';
 const ManageUser = () => {
 
     const [userData,setUserData]=React.useState([]);
-
-
     const fetchUserData=async() => {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user/getall`)
             console.table(res.data);
             setUserData(res.data);
     
     }
-     
     useEffect(() => {
         fetchUserData();
         
