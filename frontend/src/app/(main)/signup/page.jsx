@@ -46,7 +46,7 @@ const Signup = () => {
         console.log(res.statusText);
         toast.success('User Registered Successfully')
         resetForm();
-        router.push('/login');
+        router.push('/dashboard');
 
       } catch (error) {
         console.log(error);

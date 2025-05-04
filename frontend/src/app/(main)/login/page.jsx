@@ -1,11 +1,13 @@
 'use client';
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const Login = () => {
+  const router = useRouter(); // Initialize router for navigation
 
   // Define validation schema using Yup
   const validationSchema = Yup.object({
@@ -35,6 +37,7 @@ const Login = () => {
         }).catch((err) => {
           console.log(err);
           toast.error("Login failed. Please check your credentials.");
+          router.push('/signup');
         });
 
       // Here you would typically handle authentication

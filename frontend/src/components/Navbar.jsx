@@ -1,77 +1,104 @@
-'use client'
-import React from 'react'
+"use client";
+import React, { useState } from "react";
+import { FiArrowRight, FiLogIn } from "react-icons/fi";
 
 const Navbar = () => {
-  return (
-    <div>
-      <nav className="flex flex-wrap items-center justify-between p-3 bg-[#e8e8e5]">
-    <div className="text-4xl font-extrabold">TalentSphere</div>
-    <div className="flex md:hidden">
-      <button id="hamburger">
-        <img
-          className="toggle block"
-          src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png"
-          width={40}
-          height={40}
-        />
-        <img
-          className="toggle hidden"
-          src="https://img.icons8.com/fluent-systems-regular/2x/close-window.png"
-          width={40}
-          height={40}
-        />
-      </button>
-    </div>
-    <div className=" toggle hidden w-full md:w-auto md:flex text-right text-bold mt-5 md:mt-0 md:border-none">
-      <a
-        href="#home"
-        className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none"
-      >
-        Home
-      </a>
-      <a
-        href="#services"
-        className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none"
-      >
-        Services
-      </a>
-      <a
-        href="#aboutus"
-        className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none"
-      >
-        About us
-      </a>
-      <a
-        href="#steps"
-        className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none"
-      >
-        Steps
-      </a>
-      <a
-        href="#gallery"
-        className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none"
-      >
-        Gallery
-      </a>
-      <a
-        href="#contactUs"
-        className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none"
-      >
-        Visit Us
-      </a>
-    </div>
-    <div className="toggle w-full text-end hidden md:flex md:w-auto px-2 py-2 md:rounded">
-      <a href="tel:+123">
-        <div className="flex justify-end">
-          <div className="flex items-center h-10 w-30 rounded-md bg-[#c8a876] text-white font-medium p-2">            
-            Sign Up
-          </div>
-        </div>
-      </a>
-    </div>
-  </nav>
-    </div>
-  )
-}
+  const [menuOpen, setMenuOpen] = useState(false);
 
-export default Navbar
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  return (
+    <nav className="bg-white rounded-2xl shadow-md font-sans px-6 py-4 md:px-10 md:py-5">
+      <div className="flex items-center justify-between max-w-7xl mx-auto w-full">
+        {/* Logo */}
+        <div className="text-3xl md:text-4xl font-extrabold text-gray-800">
+          TalentSphere
+        </div>
+
+        {/* Desktop Nav Links */}
+        <div className="hidden md:flex items-center space-x-6">
+          {["Home", "Services", "About us", "Steps", "Gallery", "Visit Us"].map(
+            (label) => (
+              <a
+                key={label}
+                href={`#${label.replace(/\s+/g, "").toLowerCase()}`}
+                className="text-lg text-gray-700 hover:text-blue-600 transition duration-200"
+              >
+                {label}
+              </a>
+            )
+          )}
+        </div>
+
+        {/* Desktop Buttons */}
+        <div className="hidden md:flex space-x-4">
+          <a
+            href="/login"
+            className="flex items-center gap-2 border border-[#4BA3A7] text-[#4BA3A7] hover:bg-[#4BA3A7] hover:text-white font-medium px-4 py-2 rounded-xl transition duration-200"
+          >
+            <FiLogIn className="text-lg" />
+            Login
+          </a>
+          <a
+            href="/login"
+            className="flex items-center gap-2 bg-[#4BA3A7] text-white hover:bg-[#3b8b8f] font-medium px-4 py-2 rounded-xl transition duration-200"
+          >
+            Continue <FiArrowRight className="text-lg" />
+          </a>
+        </div>
+
+        {/* Hamburger Menu (Mobile) */}
+        <button
+          onClick={toggleMenu}
+          className="md:hidden focus:outline-none ml-auto"
+          aria-label="Toggle menu"
+        >
+          <img
+            src={
+              menuOpen
+                ? "https://img.icons8.com/fluent-systems-regular/2x/close-window.png"
+                : "https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png"
+            }
+            alt="menu"
+            width={35}
+            height={35}
+          />
+        </button>
+      </div>
+
+      {/* Mobile Dropdown */}
+      {menuOpen && (
+        <div className="md:hidden mt-4 flex flex-col space-y-4">
+          {["Home", "Services", "About us", "Steps", "Gallery", "Visit Us"].map(
+            (label) => (
+              <a
+                key={label}
+                href={`#${label.replace(/\s+/g, "").toLowerCase()}`}
+                className="text-lg text-gray-700 hover:text-blue-600 transition duration-200"
+              >
+                {label}
+              </a>
+            )
+          )}
+
+          {/* Mobile Buttons */}
+          <a
+            href="/login"
+            className="flex items-center justify-center gap-2 border border-[#4BA3A7] text-[#4BA3A7] hover:bg-[#4BA3A7] hover:text-white font-medium px-4 py-2 rounded-xl transition duration-200"
+          >
+            <FiLogIn className="text-lg" />
+            Login
+          </a>
+          <a
+            href="/login"
+            className="flex items-center justify-center gap-2 bg-[#4BA3A7] text-white hover:bg-[#3b8b8f] font-medium px-4 py-2 rounded-xl transition duration-200"
+          >
+            Continue <FiArrowRight className="text-lg" />
+          </a>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;
