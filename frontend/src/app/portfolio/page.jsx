@@ -46,7 +46,7 @@ const Portfolio = ({ portfolioData: propPortfolioData }) => {
         <div className="max-w-7xl mx-auto px-4 py-12 flex flex-col md:flex-row items-center">
           <div className="md:w-1/2">
             <h1 className="text-4xl font-bold text-gray-800">
-              {portfolioData.name}
+              {portfolioData.name || 'Your Name'}
             </h1>
             {portfolioData.job_title && (
               <h2 className="text-2xl text-gray-600 mt-2">
@@ -162,7 +162,7 @@ const Portfolio = ({ portfolioData: propPortfolioData }) => {
       )}
 
       {/* Contact */}
-      {portfolioData.email || portfolioData.phone ? (
+      {(portfolioData.email || portfolioData.phone) && (
         <section id="contact" className="max-w-7xl mx-auto px-4 py-12">
           <h3 className="text-3xl font-semibold mb-6 text-gray-800">Contact</h3>
           <p className="text-gray-700 mb-4">Feel free to reach out for collaborations or just a friendly hello!</p>
@@ -175,7 +175,7 @@ const Portfolio = ({ portfolioData: propPortfolioData }) => {
             )}
           </div>
         </section>
-      ) : null}
+      )}
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-6">
