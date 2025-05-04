@@ -23,57 +23,69 @@ const Portfolio4 = ({ portfolioData: propPortfolioData }) => {
 
   return (
     <div className="p-10 min-h-screen bg-gradient-to-r from-blue-400 via-green-500 to-yellow-500 text-white">
+      {/* Header Section */}
       <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-5xl font-extrabold">{portfolioData.name}</h1>
-        <h2 className="text-3xl font-semibold mt-2">{portfolioData.job_title}</h2>
-        <p className="mt-4 text-lg italic">{portfolioData.summary}</p>
-        <img src={portfolioData.profileImage} alt={`${portfolioData.name}'s profile`} className="mt-4 rounded-full w-32 h-32 mx-auto" />
+        <h1 className="text-5xl font-extrabold">{portfolioData.name || 'Your Name'}</h1>
+        {portfolioData.job_title && (
+          <h2 className="text-3xl font-semibold mt-2">{portfolioData.job_title}</h2>
+        )}
+        {portfolioData.summary && (
+          <p className="mt-4 text-lg italic">{portfolioData.summary}</p>
+        )}
+        {portfolioData.profileImage && (
+          <img
+            src={portfolioData.profileImage}
+            alt={`${portfolioData.name}'s profile`}
+            className="mt-4 rounded-full w-32 h-32 mx-auto"
+          />
+        )}
       </div>
 
       {/* Skills Section */}
-      <div className="mt-10">
-        <h3 className="text-3xl font-bold text-center">Skills</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-center">
-          {portfolioData.skills && portfolioData.skills.length > 0 ? (
-            portfolioData.skills.map((skill, index) => (
+      {portfolioData.skills?.length > 0 && (
+        <div className="mt-10">
+          <h3 className="text-3xl font-bold text-center">Skills</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-center">
+            {portfolioData.skills.map((skill, index) => (
               <span key={index} className="bg-white text-purple-700 py-2 px-4 rounded shadow-md">
                 {skill}
               </span>
-            ))
-          ) : (
-            <p>No skills available</p>
-          )}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Experience Section */}
-      <div className="mt-10">
-        <h3 className="text-3xl font-bold text-center">Experience</h3>
-        <div className="mt-4 space-y-6">
-          {portfolioData.experience && portfolioData.experience.length > 0 ? (
-            portfolioData.experience.map((exp, index) => (
+      {portfolioData.experience?.length > 0 && (
+        <div className="mt-10">
+          <h3 className="text-3xl font-bold text-center">Experience</h3>
+          <div className="mt-4 space-y-6">
+            {portfolioData.experience.map((exp, index) => (
               <div key={index} className="bg-white text-purple-700 p-4 rounded shadow-md">
                 <h4 className="text-2xl font-semibold">{exp.role}</h4>
                 <p className="text-gray-700">{exp.company} | {exp.duration}</p>
                 <p className="mt-2 text-gray-600">{exp.description}</p>
               </div>
-            ))
-          ) : (
-            <p className="text-center">No experience listed</p>
-          )}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Projects Section */}
-      <section id="projects" className="py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <h3 className="text-3xl font-semibold mb-6 text-gray-800">Projects</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {portfolioData.projects &&
-              portfolioData.projects.map((project, index) => (
-                <div key={index} className="border rounded shadow hover:shadow-lg transition p-4 bg-white">
+      {portfolioData.projects?.length > 0 && (
+        <section id="projects" className="py-12">
+          <div className="max-w-7xl mx-auto px-4">
+            <h3 className="text-3xl font-semibold mb-6 text-white">Projects</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {portfolioData.projects.map((project, index) => (
+                <div
+                  key={index}
+                  className="border rounded shadow hover:shadow-lg transition p-4 bg-white"
+                >
                   <h4 className="text-2xl font-semibold text-gray-800">{project.title}</h4>
-                  <img src={project.image} alt={project.title} className="mt-2 rounded-lg" />
+                  {project.image && (
+                    <img src={project.image} alt={project.title} className="mt-2 rounded-lg" />
+                  )}
                   <p className="mt-2 text-gray-700">{project.description}</p>
                   {project.technologies && (
                     <p className="mt-2 text-gray-600">
@@ -92,23 +104,26 @@ const Portfolio4 = ({ portfolioData: propPortfolioData }) => {
                   )}
                 </div>
               ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Education Section */}
-      <section id="education" className="py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <h3 className="text-3xl font-semibold mb-6 text-gray-800">Education</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {portfolioData.education &&
-              portfolioData.education.map((education, index) => (
+      {portfolioData.education?.length > 0 && (
+        <section id="education" className="py-12">
+          <div className="max-w-7xl mx-auto px-4">
+            <h3 className="text-3xl font-semibold mb-6 text-white">Education</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {portfolioData.education.map((education, index) => (
                 <div key={index} className="border rounded shadow hover:shadow-lg transition p-4 bg-white">
                   <h4 className="text-2xl font-semibold text-gray-800">{education.degree}</h4>
                   <p className="mt-2 text-gray-700">{education.institution}</p>
-                  <p className="mt-2 text-gray-600">
-                    <span className="font-semibold">Passout:</span> {education.end_year}
-                  </p>
+                  {education.end_year && (
+                    <p className="mt-2 text-gray-600">
+                      <span className="font-semibold">Passout:</span> {education.end_year}
+                    </p>
+                  )}
                   {education.location && (
                     <p className="mt-2 text-gray-600">
                       <span className="font-semibold">Location:</span> {education.location}
@@ -121,13 +136,16 @@ const Portfolio4 = ({ portfolioData: propPortfolioData }) => {
                   )}
                 </div>
               ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Footer */}
       <footer className="mt-16 text-center text-white">
-        <p className="text-lg">&copy; {new Date().getFullYear()} {portfolioData.name}. All rights reserved.</p>
+        <p className="text-lg">
+          &copy; {new Date().getFullYear()} {portfolioData.name || 'Portfolio'}. All rights reserved.
+        </p>
       </footer>
     </div>
   );
