@@ -9,7 +9,8 @@ export default function DashboardNavbar() {
       <div className="flex justify-between">
         <div className="font-bold text-lg">Dashboard Panel</div>
         <div className="space-x-4">
-          <Link href="/dashboard" className="hover:underline">Home</Link>
+          {/* Link the Home button to the landing page */}
+          <Link href="/" className="hover:underline">Home</Link>
           <Link href="/Manage-user" className="hover:underline">Manage Users</Link>
           <Link href="/upload-file" className="hover:underline">Upload</Link>
           <Link href="/portfolio" className="hover:underline">Portfolios</Link>

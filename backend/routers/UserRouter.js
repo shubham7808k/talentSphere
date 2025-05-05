@@ -1,6 +1,7 @@
 const express = require('express');
-const  UserModel  = require('../models/UserModel');
-const jwt=require('jsonwebtoken')
+const UserModel = require('../models/UserModel');
+const jwt = require('jsonwebtoken');
+const FeedbackModel = require('../models/FeedbackModel'); // Import the Feedback model
 
 const router = express.Router();
 
@@ -130,6 +131,32 @@ router.post('/authenticate', (req, res) => {
             res.status(500).json(err);
         });
 
-})
+});
+
+// Feedback submission route
+router.post('/feedbacks', (req, res) => {
+  const feedback = new FeedbackModel(req.body);
+
+  feedback.save()
+    .then((result) => {
+      res.status(200).json({ message: 'Feedback submitted successfully!', result });
+    })
+    .catch((err) => {
+      console.error('Error saving feedback:', err);
+      res.status(500).json({ message: 'Failed to submit feedback', error: err });
+    });
+});
+
+// Fetch all feedbacks route
+router.get('/feedbacks', (req, res) => {
+  FeedbackModel.find()
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      console.error('Error fetching feedbacks:', err);
+      res.status(500).json({ message: 'Failed to fetch feedbacks', error: err });
+    });
+});
 
 module.exports = router;
