@@ -5,12 +5,10 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
+
 
 const Login = () => {
   const router = useRouter(); // Initialize router for navigation
-
-  const router = useRouter();
 
   // Define validation schema using Yup
   const validationSchema = Yup.object({
