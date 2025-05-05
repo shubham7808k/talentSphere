@@ -10,17 +10,19 @@ import { useRouter } from 'next/navigation';
 const AdminLogin = () => {
   const router = useRouter();
 
+  // Validation schema for login
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email').required('Required'),
     password: Yup.string().min(6, 'At least 6 characters').required('Required'),
   });
 
+  // Formik for login
   const formik = useFormik({
     initialValues: { email: '', password: '' },
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/admin/authenticate`, values);
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/admin/authenticate`, values);
         localStorage.setItem('adminToken', res.data.token);
         toast.success('Admin login successful');
         router.push('/admin/dashboard');
@@ -31,43 +33,50 @@ const AdminLogin = () => {
   });
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
-      <form onSubmit={formik.handleSubmit} className="bg-white p-8 rounded-xl shadow-md w-96">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+      {/* Admin Login Form */}
+      <div className="bg-white p-8 rounded-xl shadow-md w-96">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-700">Admin Login</h2>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Admin Email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-          className={`w-full p-3 mb-3 rounded-lg border ${formik.touched.email && formik.errors.email ? 'border-red-500' : 'border-gray-300'}`}
-        />
-        {formik.touched.email && formik.errors.email && (
-          <p className="text-red-500 text-sm mb-3">{formik.errors.email}</p>
-        )}
+        <form onSubmit={formik.handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Admin Email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+            className={`w-full p-3 mb-3 rounded-lg border ${
+              formik.touched.email && formik.errors.email ? 'border-red-500' : 'border-gray-300'
+            }`}
+          />
+          {formik.touched.email && formik.errors.email && (
+            <p className="text-red-500 text-sm mb-3">{formik.errors.email}</p>
+          )}
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.password}
-          className={`w-full p-3 mb-3 rounded-lg border ${formik.touched.password && formik.errors.password ? 'border-red-500' : 'border-gray-300'}`}
-        />
-        {formik.touched.password && formik.errors.password && (
-          <p className="text-red-500 text-sm mb-3">{formik.errors.password}</p>
-        )}
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.password}
+            className={`w-full p-3 mb-3 rounded-lg border ${
+              formik.touched.password && formik.errors.password ? 'border-red-500' : 'border-gray-300'
+            }`}
+          />
+          {formik.touched.password && formik.errors.password && (
+            <p className="text-red-500 text-sm mb-3">{formik.errors.password}</p>
+          )}
 
-        <button
-          type="submit"
-          className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-lg transition"
-        >
-          Login as Admin
-        </button>
-      </form>
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition"
+          >
+            Login as Admin
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

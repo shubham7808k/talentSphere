@@ -2,6 +2,7 @@ const express = require('express');
 const UserModel = require('../models/UserModel');
 const jwt = require('jsonwebtoken');
 const FeedbackModel = require('../models/FeedbackModel'); // Import the Feedback model
+const AdminModel = require('../models/AdminModel');
 
 const router = express.Router();
 
@@ -97,7 +98,8 @@ router.put('/update/:id', (req, res) => {
 });
 
 router.post('/authenticate', (req, res) => {
-
+    console.log(req.body);
+    
     UserModel.findOne(req.body)
         .then((result) => {
 
@@ -157,6 +159,79 @@ router.get('/feedbacks', (req, res) => {
       console.error('Error fetching feedbacks:', err);
       res.status(500).json({ message: 'Failed to fetch feedbacks', error: err });
     });
+});
+
+router.post('/admin/assign', async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required' });
+  }
+
+  try {
+    const newAdmin = new AdminModel({ email, password });
+    await newAdmin.save();
+    res.status(201).json({ message: 'Admin assigned successfully' });
+  } catch (error) {
+    if (error.code === 11000) {
+      // Handle duplicate email error
+      res.status(400).json({ message: 'Admin with this email already exists' });
+    } else {
+      console.error('Error assigning admin:', error);
+      res.status(500).json({ message: 'Failed to assign admin', error });
+    }
+  }
+});
+
+router.get('/admin/getall', async (req, res) => {
+  try {
+    const admins = await AdminModel.find();
+    res.status(200).json(admins);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch admins', error });
+  }
+});
+
+// Admin authentication route
+router.post('/admin/authenticate', async (req, res) => {
+    console.log(req.body);
+    
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required' });
+  }
+
+  try {
+    // Find admin by email and password
+    const admin = await AdminModel.findOne({ email, password });
+
+    if (!admin) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    // Generate JWT token
+    const { _id, email: adminEmail } = admin;
+    const payload = { _id, email: adminEmail };
+
+    jwt.sign(
+      payload,
+      process.env.JWT_SECRET, // Ensure JWT_SECRET is defined in your .env file
+      { expiresIn: '1d' }, // Token expires in 1 day
+      (err, token) => {
+        if (err) {
+          console.error('Error generating token:', err);
+          return res.status(500).json({ message: 'Failed to generate token', error: err });
+        }
+
+        // Return the token
+        res.status(200).json({ token });
+      }
+    );
+  } catch (error) {
+    console.error('Error authenticating admin:', error);
+    res.status(500).json({ message: 'Failed to authenticate admin', error });
+  }
 });
 
 module.exports = router;
