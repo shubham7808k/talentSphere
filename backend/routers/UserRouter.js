@@ -234,4 +234,27 @@ router.post('/admin/authenticate', async (req, res) => {
   }
 });
 
+router.post('/save-portfolio', async (req, res) => {
+  console.log('Incoming request body:', req.body);
+
+  const { portfolioData, selectedTemplate } = req.body;
+
+  if (!portfolioData || !selectedTemplate) {
+    return res.status(400).json({ message: 'Missing required fields: portfolioData or selectedTemplate' });
+  }
+
+  try {
+    const newPortfolio = new Portfolio({
+      ...portfolioData,
+      template: selectedTemplate,
+    });
+
+    const savedPortfolio = await newPortfolio.save();
+    res.status(201).json(savedPortfolio);
+  } catch (error) {
+    console.error('Error saving portfolio:', error);
+    res.status(500).json({ message: 'Failed to save portfolio', error: error.message });
+  }
+});
+
 module.exports = router;

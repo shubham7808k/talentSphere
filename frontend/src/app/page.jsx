@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import React from 'react'
+import { FiArrowRight, FiLogIn } from "react-icons/fi";
 
 const Home = () => {
   return (
@@ -25,11 +26,12 @@ const Home = () => {
               <p className="font-regular text-pink-50 text-xl mb-8 mt-4 font-bold">
                 Smart AI transforms your resume into a stunning portfolio with zero effort.
               </p>
+
               <a
-                href="#contactUs"
-                className="px-6 py-3 bg-[#c8a876] text-white font-medium rounded-full hover:bg-[#c09858]  transition duration-200"
+                href="/signup"
+                className="px-10 py-3 bg-[#c8a876] text-white font-medium rounded-full hover:bg-[#c09858]  transition duration-200"
               >
-                Contact Us
+                Signup
               </a>
             </div>
           </div>

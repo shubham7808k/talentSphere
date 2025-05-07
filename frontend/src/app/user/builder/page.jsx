@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation'; // Import useRouter
 import axios from 'axios';
 import Portfolio from '@/app/portfolio/page';
 import Portfolio2 from '@/app/portfolio2/page';
@@ -7,9 +8,17 @@ import Portfolio3 from '@/app/portfolio3/page';
 import Portfolio4 from '@/app/portfolio4/page';
 import Portfolio5 from '@/app/portfolio5/page';
 import Portfolio6 from '@/app/portfolio6/page';
-import { IconUpload, IconSwitchHorizontal, IconExternalLink, IconChevronDown, IconChevronUp } from '@tabler/icons-react';
+import {
+  IconUpload,
+  IconSwitchHorizontal,
+  IconExternalLink,
+  IconChevronDown,
+  IconChevronUp,
+  IconDeviceFloppy, // Correct icon for "Save"
+} from '@tabler/icons-react';
 
 const Page = () => {
+  const router = useRouter(); // Initialize router for navigation
   const [file, setFile] = useState(null);
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -65,6 +74,31 @@ const Page = () => {
       })
       .finally(() => {
         setLoading(false);
+      });
+  };
+
+  const handleSave = () => {
+    if (!portfolioData) {
+      alert('No portfolio data to save.');
+      return;
+    }
+
+    console.log('Saving portfolio:', portfolioData);
+    console.log('Selected template:', selectedTemplate);
+
+    axios
+      .post('http://localhost:5500/api/portfolio/save-portfolio', {
+        portfolioData,
+        selectedTemplate,
+      })
+      .then((response) => {
+        console.log('Save response:', response.data);
+        alert('Portfolio saved successfully!');
+        router.push('/user/dashboard'); // Redirect to User Dashboard
+      })
+      .catch((error) => {
+        console.error('Error saving portfolio:', error.response?.data || error.message);
+        alert('Failed to save portfolio.');
       });
   };
 
@@ -189,6 +223,13 @@ const Page = () => {
                     >
                       <IconExternalLink size={24} />
                       Open Portfolio in New Tab
+                    </button>
+                    <button
+                      onClick={handleSave}
+                      className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 flex items-center gap-2 shadow-md"
+                    >
+                      <IconDeviceFloppy size={24} />
+                      Download Portfolio
                     </button>
                   </div>
 

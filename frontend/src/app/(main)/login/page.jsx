@@ -5,7 +5,10 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5092e8b (kjshkha)
 
 const Login = () => {
   const router = useRouter(); // Initialize router for navigation
@@ -41,9 +44,6 @@ const Login = () => {
           toast.error("Login failed. Please check your credentials.");
           router.push('/signup');
         });
-
-      // Here you would typically handle authentication
-      // e.g., call an API to verify credentials
     },
   });
 
@@ -168,9 +168,8 @@ const Login = () => {
           </div>
         </div>
       </>
-
     </div>
-  )
-}
+  );
+};
 
 export default Login;
