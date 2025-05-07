@@ -123,14 +123,14 @@ const Page = () => {
             )}
             <button
               type="submit"
-              className={`px-6 py-3 rounded-lg text-white font-semibold flex items-center justify-center gap-2 shadow-md ${
-                loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
-              }`}
+              className={`px-6 py-3 rounded-lg text-white font-semibold flex items-center justify-center gap-2 shadow-md ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+                }`}
               disabled={loading}
             >
               <IconUpload size={24} />
               {loading ? 'Uploading...' : 'Upload'}
             </button>
+
           </form>
 
           <div className="mt-8">
@@ -164,14 +164,14 @@ const Page = () => {
                   <button
                     key={template.name}
                     onClick={() => handleTemplateChange(template.name)}
-                    className={`p-4 border rounded-lg text-center font-semibold shadow-md ${
-                      selectedTemplate === template.name
+                    className={`p-4 border rounded-lg text-center font-semibold shadow-md ${selectedTemplate === template.name
                         ? 'bg-blue-600 text-white'
                         : 'bg-gray-100 hover:bg-gray-200'
-                    }`}
+                      }`}
                   >
                     {template.label}
                   </button>
+
                 ))}
               </div>
             )}

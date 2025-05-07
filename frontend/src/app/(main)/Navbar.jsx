@@ -1,20 +1,11 @@
 'use client';
 import Link from 'next/link';
-import React from 'react'
+import React from 'react';
 
 const Navbar = () => {
   return (
     <div>
-      {/* Desktop Navbar */}
-      <nav className="bg-white shadow-md p-4 flex justify-between">
-        <div className="text-lg font-bold">TalentSphere</div>
-        <div className="space-x-4">
-          <Link href="/" className="text-gray-700 hover:text-blue-600">Home</Link>
-          <Link href="/dashboard" className="text-gray-700 hover:text-blue-600">Dashboard</Link>
-        </div>
-      </nav>
-      {/* end */}
-
+      {/* Responsive Navbar */}
       <nav className="flex flex-wrap items-center justify-between p-3 bg-[#e8e8e5]">
         <div className="text-4xl font-extrabold">TalentSphere</div>
         <div className="flex md:hidden">
@@ -34,42 +25,12 @@ const Navbar = () => {
           </button>
         </div>
         <div className=" toggle hidden w-full md:w-auto md:flex text-right text-bold mt-5 md:mt-0 md:border-none">
-          <a
-            href="#home"
-            className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none"
-          >
-            Home
-          </a>
-          <a
-            href="#services"
-            className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none"
-          >
-            Services
-          </a>
-          <a
-            href="#aboutus"
-            className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none"
-          >
-            About us
-          </a>
-          <a
-            href="#steps"
-            className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none"
-          >
-            Steps
-          </a>
-          <a
-            href="#gallery"
-            className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none"
-          >
-            Gallery
-          </a>
-          <a
-            href="#contactUs"
-            className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none"
-          >
-            Visit Us
-          </a>
+          <a href="#home" className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Home</a>
+          <a href="#services" className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Services</a>
+          <a href="#aboutus" className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">About us</a>
+          <a href="#steps" className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Steps</a>
+          <a href="#gallery" className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Gallery</a>
+          <a href="#contactUs" className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Visit Us</a>
         </div>
         <div className="toggle w-full text-end hidden md:flex md:w-auto px-2 py-2 md:rounded">
           <a href="tel:+123">
@@ -82,7 +43,7 @@ const Navbar = () => {
         </div>
       </nav>
     </div>
-  )
-}
+  );
+};
 
 export default Navbar;
