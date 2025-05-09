@@ -32,18 +32,21 @@ const Navbar = () => {
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex space-x-4">
-          <a
-            href="/login"
-            className="flex items-center gap-2 border border-[#4BA3A7] text-[#4BA3A7] hover:bg-[#4BA3A7] hover:text-white font-medium px-4 py-2 rounded-xl transition duration-200"
-          >
-            <FiLogIn className="text-lg" />
-            Login
-          </a>
+          {/* Login Button */}
           <a
             href="/login"
             className="flex items-center gap-2 bg-[#4BA3A7] text-white hover:bg-[#3b8b8f] font-medium px-4 py-2 rounded-xl transition duration-200"
           >
-            Continue <FiArrowRight className="text-lg" />
+            <FiLogIn className="text-lg" />
+            Login
+          </a>
+
+          {/* Signup Button */}
+          <a
+            href="/signup"
+            className="flex items-center gap-2 border border-[#4BA3A7] text-[#4BA3A7] hover:bg-[#4BA3A7] hover:text-white font-medium px-4 py-2 rounded-xl transition duration-200"
+          >
+            <FiLogIn className="text-lg" />Signup 
           </a>
         </div>
 
@@ -90,10 +93,10 @@ const Navbar = () => {
             Login
           </a>
           <a
-            href="/login"
+            href="/signup"
             className="flex items-center justify-center gap-2 bg-[#4BA3A7] text-white hover:bg-[#3b8b8f] font-medium px-4 py-2 rounded-xl transition duration-200"
           >
-            Continue <FiArrowRight className="text-lg" />
+            Signup <FiArrowRight className="text-lg" />
           </a>
         </div>
       )}

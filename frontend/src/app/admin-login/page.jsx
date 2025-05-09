@@ -23,9 +23,9 @@ const AdminLogin = () => {
     onSubmit: async (values) => {
       try {
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/admin/authenticate`, values);
-        localStorage.setItem('adminToken', res.data.token);
+        localStorage.setItem('adminToken', res.data.token); // Save token to localStorage
         toast.success('Admin login successful');
-        router.push('/admin/dashboard');
+        router.push('/dashboard'); // Redirect to dashboard
       } catch (err) {
         toast.error('Invalid admin credentials');
       }
