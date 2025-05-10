@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { IconUser, IconMail, IconStar, IconMessageCircle } from '@tabler/icons-react';
+import axios from 'axios';
 
 const FeedbackForm = () => {
   const [formData, setFormData] = useState({
@@ -17,10 +18,15 @@ const FeedbackForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Feedback submitted!');
-    setFormData({ name: '', email: '', rating: '', message: '' });
+    try {
+      await axios.post('http://localhost:5500/api/feedback', formData);
+      alert('Feedback submitted!');
+      setFormData({ name: '', email: '', rating: '', message: '' });
+    } catch {
+      alert('Failed to submit feedback.');
+    }
   };
 
   return (

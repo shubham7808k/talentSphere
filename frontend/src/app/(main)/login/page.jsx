@@ -5,8 +5,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+<<<<<<< HEAD
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
+=======
+>>>>>>> d105c50 (dashboard changes)
 
 const Login = () => {
   const router = useRouter();

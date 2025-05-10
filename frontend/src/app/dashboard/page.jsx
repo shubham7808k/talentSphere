@@ -19,16 +19,9 @@ const Dashboard = () => {
 
   // Fetch feedbacks from the backend
   useEffect(() => {
-    const fetchFeedbacks = async () => {
-      try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/feedbacks`);
-        setFeedbacks(response.data); // Update feedbacks state with data from backend
-      } catch (error) {
-        console.error('Error fetching feedbacks:', error);
-      }
-    };
-
-    fetchFeedbacks();
+    axios.get('http://localhost:5500/api/feedback')
+      .then(res => setFeedbacks(res.data))
+      .catch(() => setFeedbacks([]));
   }, []);
 
   const handleEdit = (id) => {
@@ -89,29 +82,24 @@ const Dashboard = () => {
 
         {/* Feedback Section */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">User Feedback</h2>
-          <div className="overflow-x-auto bg-white shadow rounded-lg">
-            <table className="min-w-full table-auto border-collapse">
-              <thead>
-                <tr className="bg-gray-100 text-gray-700">
-                  <th className="px-6 py-3 text-left text-sm font-medium">Name</th>
-                  <th className="px-6 py-3 text-left text-sm font-medium">Email</th>
-                  <th className="px-6 py-3 text-left text-sm font-medium">Rating</th>
-                  <th className="px-6 py-3 text-left text-sm font-medium">Feedback</th>
-                </tr>
-              </thead>
-              <tbody>
-                {feedbacks.map((feedback, index) => (
-                  <tr key={index} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-sm text-gray-700">{feedback.name}</td>
-                    <td className="px-6 py-4 text-sm text-gray-700">{feedback.email}</td>
-                    <td className="px-6 py-4 text-sm text-gray-700">{feedback.rating}</td>
-                    <td className="px-6 py-4 text-sm text-gray-700">{feedback.message}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <h2 className="text-2xl font-bold mb-6 text-indigo-700">User Feedbacks</h2>
+          {feedbacks.length === 0 ? (
+            <p className="text-gray-500">No feedbacks yet.</p>
+          ) : (
+            <div className="space-y-6">
+              {feedbacks.map((fb, idx) => (
+                <div key={fb._id || idx} className="border-b pb-4">
+                  <div className="flex items-center gap-4 mb-2">
+                    <span className="font-semibold text-indigo-600">{fb.name}</span>
+                    <span className="text-gray-400 text-sm">{fb.email}</span>
+                    <span className="ml-auto text-yellow-500 font-bold">Rating: {fb.rating}</span>
+                  </div>
+                  <div className="text-gray-700 mb-1">{fb.message}</div>
+                  <div className="text-xs text-gray-400">{new Date(fb.createdAt).toLocaleString()}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* User Management Section */}

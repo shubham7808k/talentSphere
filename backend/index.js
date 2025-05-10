@@ -11,7 +11,8 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const UserRouter = require('./routers/userRouter');
 const portfolioRouter = require('./routers/portfolioRouter');
-
+const feedbackRouter = require('./routers/feedbackRouter');
+const adminRouter = require('./routers/adminRouter');
 
 const upload = multer({ dest: "uploads/" });
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -28,7 +29,8 @@ app.use(express.json());
 //router
 app.use('/user', UserRouter);
 app.use('/api/portfolio', portfolioRouter);     
-
+app.use('/api/feedback', feedbackRouter);
+app.use('/api/admin', adminRouter);
 
 //endpoint or route
 app.get('/', (req, res) => {

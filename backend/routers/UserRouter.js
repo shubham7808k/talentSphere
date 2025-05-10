@@ -1,7 +1,7 @@
 const express = require('express');
 const UserModel = require('../models/UserModel');
 const jwt = require('jsonwebtoken');
-const FeedbackModel = require('../models/FeedbackModel'); // Import the Feedback model
+const FeedbackModel = require('../models/feedbackModel'); 
 const AdminModel = require('../models/AdminModel');
 
 const router = express.Router();
@@ -254,6 +254,22 @@ router.post('/save-portfolio', async (req, res) => {
   } catch (error) {
     console.error('Error saving portfolio:', error);
     res.status(500).json({ message: 'Failed to save portfolio', error: error.message });
+  }
+});
+
+router.get('/user-portfolio', async (req, res) => {
+  try {
+    const userId = req.user.id; // Assuming user ID is available in the request
+    const portfolio = await Portfolio.findOne({ userId });
+
+    if (!portfolio) {
+      return res.status(404).json({ message: 'Portfolio not found' });
+    }
+
+    res.status(200).json(portfolio);
+  } catch (error) {
+    console.error('Error fetching portfolio:', error);
+    res.status(500).json({ message: 'Failed to fetch portfolio' });
   }
 });
 

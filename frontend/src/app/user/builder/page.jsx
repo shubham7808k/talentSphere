@@ -17,7 +17,7 @@ import {
   IconDeviceFloppy, // Correct icon for "Save"
 } from '@tabler/icons-react';
 
-const Page = () => {
+const PortfolioBuilder = () => {
   const router = useRouter(); // Initialize router for navigation
   const [file, setFile] = useState(null);
   const [response, setResponse] = useState(null);
@@ -78,23 +78,31 @@ const Page = () => {
   };
 
   const handleSave = () => {
-    if (!portfolioData) {
-      alert('No portfolio data to save.');
+    if (!file) {
+      alert('Please upload your resume.');
       return;
     }
 
-    console.log('Saving portfolio:', portfolioData);
-    console.log('Selected template:', selectedTemplate);
+    const token = localStorage.getItem('user');
+    const websiteCode = getGeneratedCode();
 
     axios
-      .post('http://localhost:5500/api/portfolio/save-portfolio', {
-        portfolioData,
-        selectedTemplate,
-      })
+      .post(
+        'http://localhost:5500/api/portfolio/save-portfolio',
+        {
+          resumeFile: file.name, // or the path/url after upload
+          websiteCode,
+          isPublished: false,
+        },
+        {
+          headers: {
+            'x-auth-token': token,
+          },
+        }
+      )
       .then((response) => {
-        console.log('Save response:', response.data);
         alert('Portfolio saved successfully!');
-        router.push('/user/dashboard'); // Redirect to User Dashboard
+        // router.push('/user/dashboard');
       })
       .catch((error) => {
         console.error('Error saving portfolio:', error.response?.data || error.message);
@@ -121,6 +129,12 @@ const Page = () => {
 
   const toggleTemplateSelector = () => {
     setIsTemplateSelectorOpen(!isTemplateSelectorOpen);
+  };
+
+  const getGeneratedCode = () => {
+    // You should replace this with actual code extraction logic
+    // For example, you might serialize the selected template's JSX or HTML
+    return `<html><body><h1>${portfolioData?.name || ''}</h1></body></html>`;
   };
 
   return (
@@ -229,7 +243,7 @@ const Page = () => {
                       className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 flex items-center gap-2 shadow-md"
                     >
                       <IconDeviceFloppy size={24} />
-                      Download Portfolio
+                      Save Portfolio
                     </button>
                   </div>
 
@@ -251,4 +265,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default PortfolioBuilder;
