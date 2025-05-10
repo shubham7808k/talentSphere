@@ -1,12 +1,15 @@
 'use client'
+import React, { useState } from 'react'
 import { useFormik } from 'formik'
-import React from 'react'
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 import { LineSpinner } from 'ldrs/react'
 import 'ldrs/react/LineSpinner.css'
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
+import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FaEnvelope, FaLock, FaUser } from 'react-icons/fa'
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -27,8 +30,10 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Signup = () => {
-
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [shake, setShake] = useState(false);
 
   const signupForm = useFormik({
     initialValues: {
@@ -37,204 +42,224 @@ const Signup = () => {
       password: '',
       confirmPassword: ''
     },
+    validationSchema: SignupSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
-      console.log(values);
-
       try {
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/add`, values);
-        console.log(res.status);
-        console.log(res.statusText);
-        toast.success('User Registered Successfully')
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/add`, values);
+        toast.success('User Registered Successfully');
         resetForm();
-        router.push('/dashboard');
-
+        router.push('/login');
       } catch (error) {
-        console.log(error);
         setSubmitting(false);
+        setShake(true);
+        setTimeout(() => setShake(false), 500);
+        setShowModal(true);
         toast.error('User Registration Failed');
       }
-
-      // send values to backend
-
-    },
-    validationSchema: SignupSchema
+    }
   });
 
+  const handleRedirect = (hasAccount) => {
+    setShowModal(false);
+    if (hasAccount) router.push('/login');
+  };
+
   return (
-    <div>
-      <>
-        {/* source:https://codepen.io/owaiswiz/pen/jOPvEPB */}
-        <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-          <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
-            <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
-              <div>
-                {/*<h1 class="text-3xl w-32 mx-auto font-bold text-slate-800">TalentSphere</h1>*/}
-              </div>
-              <div className="mt-12 flex flex-col items-center">
-                <h1 className="text-2xl xl:text-3xl font-extrabold">Sign up</h1>
-                <div className="w-full flex-1 mt-8">
-                  <div className="flex flex-col items-center">
-                    <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-slate-200 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
-                      <div className="bg-white p-2 rounded-full">
-                        <svg className="w-4" viewBox="0 0 533.5 544.3">
-                          <path
-                            d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
-                            fill="#4285f4"
-                          />
-                          <path
-                            d="M272.1 544.3c73.4 0 135.3-24.1 180.4-65.7l-87.7-68c-24.4 16.6-55.9 26-92.6 26-71 0-131.2-47.9-152.8-112.3H28.9v70.1c46.2 91.9 140.3 149.9 243.2 149.9z"
-                            fill="#34a853"
-                          />
-                          <path
-                            d="M119.3 324.3c-11.4-33.8-11.4-70.4 0-104.2V150H28.9c-38.6 76.9-38.6 167.5 0 244.4l90.4-70.1z"
-                            fill="#fbbc04"
-                          />
-                          <path
-                            d="M272.1 107.7c38.8-.6 76.3 14 104.4 40.8l77.7-77.7C405 24.6 339.7-.8 272.1 0 169.2 0 75.1 58 28.9 150l90.4 70.1c21.5-64.5 81.8-112.4 152.8-112.4z"
-                            fill="#ea4335"
-                          />
-                        </svg>
-                      </div>
-                      <span className="ml-4">Sign Up with Google</span>
-                    </button>
-                    <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-slate-200 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline mt-5">
-                      <div className="bg-white p-1 rounded-full">
-                        <svg className="w-6" viewBox="0 0 32 32">
-                          <path
-                            fillRule="evenodd"
-                            d="M16 4C9.371 4 4 9.371 4 16c0 5.3 3.438 9.8 8.207 11.387.602.11.82-.258.82-.578 0-.286-.011-1.04-.015-2.04-3.34.723-4.043-1.609-4.043-1.609-.547-1.387-1.332-1.758-1.332-1.758-1.09-.742.082-.726.082-.726 1.203.086 1.836 1.234 1.836 1.234 1.07 1.836 2.808 1.305 3.492 1 .11-.777.422-1.305.762-1.605-2.664-.301-5.465-1.332-5.465-5.93 0-1.313.469-2.383 1.234-3.223-.121-.3-.535-1.523.117-3.175 0 0 1.008-.32 3.301 1.23A11.487 11.487 0 0116 9.805c1.02.004 2.047.136 3.004.402 2.293-1.55 3.297-1.23 3.297-1.23.656 1.652.246 2.875.12 3.175.77.84 1.231 1.91 1.231 3.223 0 4.61-2.804 5.621-5.476 5.922.43.367.812 1.101.812 2.219 0 1.605-.011 2.898-.011 3.293 0 .32.214.695.824.578C24.566 25.797 28 21.3 28 16c0-6.629-5.371-12-12-12z"
-                          />
-                        </svg>
-                      </div>
-                      <span className="ml-4">Sign Up with GitHub</span>
-                    </button>
-                  </div>
-                  <div className="my-12 border-b text-center">
-                    <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
-                      Or sign up with e-mail
-                    </div>
-                  </div>
-                  <form onSubmit={signupForm.handleSubmit}>
-                    <div className="mx-auto max-w-xs">
-                      <input
-                        type="text"
-                        id="name"
-                        placeholder="Name"
-                        onChange={signupForm.handleChange}
-                        value={signupForm.values.name}
-                        className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      />
-                      {
-                        (signupForm.touched.name && signupForm.errors.name) && (
-                          <p className="text-xs text-red-600 mt-2" id="email-error">
-                            {signupForm.errors.name}
-                          </p>
-                        )
-                      }
-                      <input
-                        type="email"
-                        id="email"
-                        placeholder="Email"
-                        onChange={signupForm.handleChange}
-                        value={signupForm.values.email}
-                        className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                      />
-                      {
-                        (signupForm.touched.email && signupForm.errors.email) && (
-                          <p className="text-xs text-red-600 mt-2" id="email-error">
-                            {signupForm.errors.email}
-                          </p>
-                        )
-                      }
-                      <input
-                        type="password"
-                        id="password"
-                        placeholder="Password"
-                        onChange={signupForm.handleChange}
-                        value={signupForm.values.password}
-                        className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                      />
-                      {
-                        (signupForm.touched.password && signupForm.errors.password) && (
-                          <p className="text-xs text-red-600 mt-2" id="email-error">
-                            {signupForm.errors.password}
-                          </p>
-                        )
-                      }
-                      <input
-                        type="password"
-                        id='confirmPassword'
-                        placeholder="Confirm Password"
-                        onChange={signupForm.handleChange}
-                        value={signupForm.values.confirmPassword}
-                        className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                      />
-                      {
-                        (signupForm.touched.confirmPassword && signupForm.errors.confirmPassword) && (
-                          <p className="text-xs text-red-600 mt-2" id="email-error">
-                            {signupForm.errors.confirmPassword}
-                          </p>
-                        )
-                      }
-                      <button
-                        type="submit"
-                        disabled={signupForm.isSubmitting}
-                        className="mt-5 tracking-wide font-semibold bg-slate-500 text-black w-full py-4 rounded-lg hover:bg-slate-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                        <svg
-                          className="w-6 h-6 -ml-2"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                          <circle cx="8.5" cy={7} r={4} />
-                          <path d="M20 8v6M23 11h-6" />
-                        </svg>
-                        <span className="ml-3"></span>
-
-                        {
-                          signupForm.isSubmitting ? (
-                           // Default values shown
-                            <LineSpinner
-                              size="30"
-                              stroke="3"
-                              speed="1"
-                              color="white"
-                            />
-                          ) : "Sign Up"
-                        }
-
-                      </button>
-                      <p className="mt-6 text-xs text-gray-600 text-center">
-                        I agree to abide by talentsphere&nbsp;
-                        <a href="#" className="border-b border-gray-500 border-dotted">
-                          Terms of Service
-                        </a>
-                        &nbsp; and its &nbsp;
-                        <a href="#" className="border-b border-gray-500 border-dotted">
-                          Privacy Policy
-                        </a>
-                      </p>
-                    </div>
-                  </form>
-                </div>
-              </div>
+    <div
+      className="min-h-screen w-full bg-gradient-to-br from-slate-100 to-blue-200 flex flex-col items-center justify-center overflow-hidden"
+      style={{
+        backgroundImage: 'url("https://img.freepik.com/free-photo/abstract-minimal-concept-plant-shadows_23-2148835269.jpg?t=st=1742147754~exp=1742151354~hmac=5a3cfa9f5d79e011acc9f50075a5bba8b82d27668916380ebb235d2364375745&w=826")',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center'
+      }}
+    >
+      <h1 className="text-4xl font-bold text-gray-800 mb-6">Sign Up</h1>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className={`bg-white/50 backdrop-blur-lg p-10 rounded-xl shadow-2xl w-full max-w-md ${shake ? 'animate-shake' : ''}`}
+      >
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Create Your Account 🚀</h2>
+        <form onSubmit={signupForm.handleSubmit} className="space-y-5">
+          {/* Name */}
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+            <div className="relative">
+              <FaUser className="absolute top-3 left-3 text-gray-500" />
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                onChange={signupForm.handleChange}
+                onBlur={signupForm.handleBlur}
+                value={signupForm.values.name}
+                className={`pl-10 mt-1 w-full rounded-md bg-white/70 px-4 py-2 text-sm text-gray-800 border ${
+                  signupForm.touched.name && signupForm.errors.name ? 'border-red-500' : 'border-gray-300'
+                } focus:outline-none focus:ring-2 focus:ring-slate-500`}
+              />
             </div>
-            <div className="flex-1 bg-indigo-100 text-center hidden lg:flex">
-              <div
-                className="w-full bg-contain bg-center"
-                style={{
-                  backgroundImage:
-                    'url("https://img.freepik.com/free-photo/abstract-minimal-concept-plant-shadows_23-2148835269.jpg?t=st=1742147754~exp=1742151354~hmac=5a3cfa9f5d79e011acc9f50075a5bba8b82d27668916380ebb235d2364375745&w=826")'
-                }}
-              ></div>
-            </div>
+            {signupForm.touched.name && signupForm.errors.name && (
+              <p className="text-red-500 text-xs mt-1">{signupForm.errors.name}</p>
+            )}
           </div>
-        </div>
-      </>
+          {/* Email */}
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <div className="relative">
+              <FaEnvelope className="absolute top-3 left-3 text-gray-500" />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                onChange={signupForm.handleChange}
+                onBlur={signupForm.handleBlur}
+                value={signupForm.values.email}
+                className={`pl-10 mt-1 w-full rounded-md bg-white/70 px-4 py-2 text-sm text-gray-800 border ${
+                  signupForm.touched.email && signupForm.errors.email ? 'border-red-500' : 'border-gray-300'
+                } focus:outline-none focus:ring-2 focus:ring-slate-500`}
+              />
+            </div>
+            {signupForm.touched.email && signupForm.errors.email && (
+              <p className="text-red-500 text-xs mt-1">{signupForm.errors.email}</p>
+            )}
+          </div>
+          {/* Password */}
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <div className="relative">
+              <FaLock className="absolute top-3 left-3 text-gray-500" />
+              <input
+                id="password"
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Your password"
+                onChange={signupForm.handleChange}
+                onBlur={signupForm.handleBlur}
+                value={signupForm.values.password}
+                className={`pl-10 mt-1 w-full rounded-md bg-white/70 px-4 py-2 text-sm text-gray-800 border ${
+                  signupForm.touched.password && signupForm.errors.password ? 'border-red-500' : 'border-gray-300'
+                } focus:outline-none focus:ring-2 focus:ring-slate-500`}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-2 text-sm text-gray-600 hover:text-gray-900"
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </button>
+            </div>
+            {signupForm.touched.password && signupForm.errors.password && (
+              <p className="text-red-500 text-xs mt-1">{signupForm.errors.password}</p>
+            )}
+          </div>
+          {/* Confirm Password */}
+          <div>
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirm Password</label>
+            <div className="relative">
+              <FaLock className="absolute top-3 left-3 text-gray-500" />
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Confirm password"
+                onChange={signupForm.handleChange}
+                onBlur={signupForm.handleBlur}
+                value={signupForm.values.confirmPassword}
+                className={`pl-10 mt-1 w-full rounded-md bg-white/70 px-4 py-2 text-sm text-gray-800 border ${
+                  signupForm.touched.confirmPassword && signupForm.errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
+                } focus:outline-none focus:ring-2 focus:ring-slate-500`}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-2 text-sm text-gray-600 hover:text-gray-900"
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </button>
+            </div>
+            {signupForm.touched.confirmPassword && signupForm.errors.confirmPassword && (
+              <p className="text-red-500 text-xs mt-1">{signupForm.errors.confirmPassword}</p>
+            )}
+          </div>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            type="submit"
+            disabled={signupForm.isSubmitting}
+            className={`w-full py-2 px-4 rounded-md text-white font-semibold transition ${
+              signupForm.isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-slate-600 hover:bg-slate-700'
+            } flex items-center justify-center`}
+          >
+            {signupForm.isSubmitting ? <LineSpinner size="30" stroke="3" speed="1" color="white" /> : 'Sign Up'}
+          </motion.button>
+        </form>
+        <p className="mt-6 text-xs text-gray-600 text-center">
+          By signing up, you agree to TalentSphere's&nbsp;
+          <a href="#" className="border-b border-gray-500 border-dotted">Terms of Service</a>
+          &nbsp;and&nbsp;
+          <a href="#" className="border-b border-gray-500 border-dotted">Privacy Policy</a>.
+        </p>
+        <p className="mt-4 text-sm text-center text-gray-500">
+          Already have an account?{' '}
+          <Link href="/login" className="text-indigo-600 hover:underline font-medium">Login</Link>
+        </p>
+      </motion.div>
 
+      {/* Modal for error */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white p-6 rounded-lg shadow-xl text-center max-w-sm w-full"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+            >
+              <h3 className="text-lg font-semibold mb-2 text-gray-800">Registration Failed</h3>
+              <p className="mb-4 text-gray-600">Already have an account?</p>
+              <div className="flex justify-center gap-4">
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => handleRedirect(true)}
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                >
+                  Go to Login
+                </motion.button>
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setShowModal(false)}
+                  className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
+                >
+                  Try Again
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* TailwindCSS custom animation */}
+      <style jsx>{`
+        .animate-shake {
+          animation: shake 0.4s linear;
+        }
+        @keyframes shake {
+          0% { transform: translateX(0); }
+          25% { transform: translateX(-8px); }
+          50% { transform: translateX(8px); }
+          75% { transform: translateX(-8px); }
+          100% { transform: translateX(0); }
+        }
+      `}</style>
     </div>
   )
 }
