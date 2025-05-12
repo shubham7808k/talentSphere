@@ -14,8 +14,10 @@ import {
   IconExternalLink,
   IconChevronDown,
   IconChevronUp,
-  IconDeviceFloppy, // Correct icon for "Save"
+  IconDeviceFloppy,
+  IconEye, // Correct icon for "Save"
 } from '@tabler/icons-react';
+import Link from 'next/link';
 
 const PortfolioBuilder = () => {
   const router = useRouter(); // Initialize router for navigation
@@ -25,6 +27,7 @@ const PortfolioBuilder = () => {
   const [portfolioData, setPortfolioData] = useState(null);
   const [selectedTemplate, setSelectedTemplate] = useState('Portfolio');
   const [isTemplateSelectorOpen, setIsTemplateSelectorOpen] = useState(false);
+  const [savedPortfolioId, setSavedPortfolioId] = useState('');
 
   useEffect(() => {
     const savedTemplate = localStorage.getItem('selectedTemplate');
@@ -84,14 +87,15 @@ const PortfolioBuilder = () => {
     }
 
     const token = localStorage.getItem('user');
-    const websiteCode = getGeneratedCode();
+    // const websiteCode = getGeneratedCode();
 
     axios
       .post(
         'http://localhost:5500/api/portfolio/save-portfolio',
         {
           resumeFile: file.name, // or the path/url after upload
-          websiteCode,
+          portfolioData,
+          template: selectedTemplate,
           isPublished: false,
         },
         {
@@ -102,6 +106,7 @@ const PortfolioBuilder = () => {
       )
       .then((response) => {
         alert('Portfolio saved successfully!');
+        setSavedPortfolioId(response.data._id);
         // router.push('/user/dashboard');
       })
       .catch((error) => {
@@ -213,8 +218,8 @@ const PortfolioBuilder = () => {
                     key={template.name}
                     onClick={() => handleTemplateChange(template.name)}
                     className={`p-4 border rounded-lg text-center font-semibold shadow-md ${selectedTemplate === template.name
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 hover:bg-gray-200'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 hover:bg-gray-200'
                       }`}
                   >
                     {template.label}
@@ -245,6 +250,18 @@ const PortfolioBuilder = () => {
                       <IconDeviceFloppy size={24} />
                       Save Portfolio
                     </button>
+                    {
+                      savedPortfolioId && (
+
+                        <Link
+                          href={`/user/preview/${savedPortfolioId}`}
+                          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 flex items-center gap-2 shadow-md"
+                        >
+                          <IconEye size={24} />
+                          Preview
+                        </Link>
+                      )
+                    }
                   </div>
 
                   <div className="mt-6">

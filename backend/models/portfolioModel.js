@@ -3,8 +3,9 @@ import mongoose from 'mongoose';
 const portfolioSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
   resumeFile: { type: String, required: true },
-  websiteCode: { type: String },
+  portfolioData: { type: Object },
   isPublished: { type: Boolean, default: false },
+  template: { type: String, default: 'default' },
   createdAt: { type: Date, default: Date.now },
 });
 

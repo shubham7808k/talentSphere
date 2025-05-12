@@ -11,14 +11,15 @@ router.post('/save-portfolio', verifyToken, async (req, res) => {
     return res.status(401).json({ msg: 'No token, authorization denied' });
   }
 
-  const { resumeFile, websiteCode, isPublished } = req.body;
+  const { resumeFile, portfolioData, isPublished, template } = req.body;
   const userId = req.user.id || req.user.userId || req.user._id; // adjust according to your JWT payload
 
   try {
     const newPortfolio = new Portfolio({
       userId,
       resumeFile,
-      websiteCode,
+      portfolioData,
+      template,
       isPublished,
     });
 
@@ -54,6 +55,20 @@ router.get('/user-portfolios', verifyToken, async (req, res) => {
     res.json(portfolios);
   } catch (error) {
     res.status(500).json({ message: 'Failed to fetch portfolios' });
+  }
+});
+
+// Get a portfolio by ID
+router.get('/portfolio/:id', async (req, res) => {
+  try {
+    const portfolio = await Portfolio.findById(req.params.id);
+    if (!portfolio) {
+      return res.status(404).json({ message: 'Portfolio not found' });
+    }
+    res.status(200).json(portfolio);
+  } catch (error) {
+    console.error('Error fetching portfolio by id:', error);
+    res.status(500).json({ message: 'Failed to fetch portfolio' });
   }
 });
 
