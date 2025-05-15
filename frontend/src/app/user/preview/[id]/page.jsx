@@ -52,6 +52,7 @@ const Preview = () => {
                 {portfolio.template === 'Portfolio3' && <Portfolio3 portfolioData={portfolio.portfolioData} />}
                 {portfolio.template === 'Portfolio4' && <Portfolio4 portfolioData={portfolio.portfolioData} />}
                 {portfolio.template === 'Portfolio5' && <Portfolio5 portfolioData={portfolio.portfolioData} />}
+                {portfolio.template === 'Portfolio6' && <Portfolio6 portfolioData={portfolio.portfolioData} />}
             </div>
         </div>
     );

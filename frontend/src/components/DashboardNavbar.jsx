@@ -7,10 +7,13 @@ export default function DashboardNavbar() {
   return (
     <nav className="bg-gray-800 text-white px-6 py-4 shadow">
     <div className="flex justify-between items-center max-w-7xl mx-auto">
-      <div className="font-bold text-xl tracking-wide">User Dashboard</div>
+      <div className="font-bold text-xl tracking-wide">Talent Sphere</div>
       <div className="space-x-6 flex items-center">
         <Link href="/" className="hover:underline">
           Home
+        </Link>
+        <Link href="/user/dashboard" className="hover:underline">
+          Dashboard
         </Link>
         <Link href="/portfolio" className="hover:underline">
           My Portfolios
