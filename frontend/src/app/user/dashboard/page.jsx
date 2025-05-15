@@ -149,23 +149,18 @@ const Dashboard = () => {
             <h2 className="text-3xl font-extrabold mb-10 text-indigo-700 tracking-tight">User Panel</h2>
             <ul className="space-y-5">
               <li>
-                <Link href="/userdashboard" className="text-gray-700 hover:text-indigo-600 font-medium transition">
-                  Dashboard
+                <Link href="/" className="text-gray-700 hover:text-indigo-600 font-medium transition">
+                  Home
                 </Link>
               </li>
               <li>
-                <Link href="/user/profile" className="text-gray-700 hover:text-indigo-600 font-medium transition">
-                  Profile
-                </Link>
-              </li>
-              <li>
-                <Link href="/user/portfolios" className="text-gray-700 hover:text-indigo-600 font-medium transition">
+                <Link href="/portfolio" className="text-gray-700 hover:text-indigo-600 font-medium transition">
                   My Portfolios
                 </Link>
               </li>
               <li>
-                <Link href="/user/payments" className="text-gray-700 hover:text-indigo-600 font-medium transition">
-                  Payments
+                <Link href="/user/builder" className="text-gray-700 hover:text-indigo-600 font-medium transition">
+                  Upload File
                 </Link>
               </li>
               <li>
@@ -271,35 +266,6 @@ const Dashboard = () => {
             </div>
           )}
 
-          {/* History Section */}
-          <div className="max-w-4xl mx-auto mt-12">
-            <h2 className="text-xl font-semibold mb-4 text-blue-700">History</h2>
-            <div className="text-gray-700">
-              {history.length > 0 ? (
-                history.map((entry, index) => (
-                  <div key={index} className="border-b py-2">
-                    <p>{entry.action} - <span className="text-gray-500">{entry.dateTime}</span></p>
-                  </div>
-                ))
-              ) : (
-                <p>No history available</p>
-              )}
-            </div>
-          </div>
-
-          {/* Payment Section */}
-          <div className="max-w-4xl mx-auto mt-12">
-            <h2 className="text-xl font-semibold mb-4 text-blue-700">Payment</h2>
-            <div className="text-gray-700">
-              <p>{paymentDetails ? `Payment details: ${paymentDetails}` : 'No payment details provided'}</p>
-              <button
-                onClick={handlePaymentChange}
-                className="mt-4 bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
-              >
-                Update Payment Details
-              </button>
-            </div>
-          </div>
         </main>
       </div>
     </div>
