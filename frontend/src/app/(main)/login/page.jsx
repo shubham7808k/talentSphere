@@ -64,6 +64,14 @@ const Login = () => {
       {/* Page Heading */}
       <h1 className="text-4xl font-bold text-gray-800 mb-6">Login</h1>
 
+      {/* Admin Login Button */}
+      <button
+        onClick={() => router.push('/admin-login')}
+        className="mb-6 px-6 py-2 bg-gray-600 text-white rounded-lg shadow hover:bg-gray-700 font-semibold transition"
+      >
+        Admin Login
+      </button>
+
       {/* Login Form Card */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}

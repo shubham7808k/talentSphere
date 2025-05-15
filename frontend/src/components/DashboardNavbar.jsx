@@ -11,9 +11,9 @@ export default function DashboardNavbar() {
         <div className="space-x-4">
           {/* Link the Home button to the landing page */}
           <Link href="/" className="hover:underline">Home</Link>
-          <Link href="/Manage-user" className="hover:underline">Manage Users</Link>
-          <Link href="/user/builder" className="hover:underline">Upload</Link>
           <Link href="/portfolio" className="hover:underline">Portfolios</Link>
+          <Link href="/user/builder" className="hover:underline">Upload</Link>
+          <Link href="/FeedbackForm" className="hover:underline">Submit Feedback</Link>
         </div>
       </div>
     </nav>
