@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation'; // Import useRouter
+import { useRouter } from 'next/navigation'; 
 import axios from 'axios';
 import Portfolio from '@/app/portfolio/page';
 import Portfolio2 from '@/app/portfolio2/page';
@@ -18,6 +18,7 @@ import {
   IconEye, // Correct icon for "Save"
 } from '@tabler/icons-react';
 import Link from 'next/link';
+import DashboardNavbar from '@/components/DashboardNavbar'; // <-- Add this import
 
 const PortfolioBuilder = () => {
   const router = useRouter(); // Initialize router for navigation
@@ -144,6 +145,7 @@ const PortfolioBuilder = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-blue-50 to-blue-100">
+      <DashboardNavbar />
       <div className="flex-grow flex items-center justify-center">
         <div className="w-full max-w-4xl bg-white shadow-2xl rounded-lg p-10">
           <h1 className="text-4xl font-extrabold text-gray-800 mb-8 flex items-center gap-3">

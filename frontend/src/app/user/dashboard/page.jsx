@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
+import DashboardNavbar from '@/components/DashboardNavbar';
 
 const Dashboard = () => {
   const [portfolios, setPortfolios] = useState([]);
@@ -139,165 +140,134 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
-      {/* Sidebar */}
-      <aside className="w-72 bg-white shadow-lg p-8 flex flex-col justify-between">
-        <div>
-          <h2 className="text-3xl font-extrabold mb-10 text-indigo-700 tracking-tight">User Panel</h2>
-          <ul className="space-y-5">
-            <li>
-              <Link href="/userdashboard" className="text-gray-700 hover:text-indigo-600 font-medium transition">
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link href="/user/profile" className="text-gray-700 hover:text-indigo-600 font-medium transition">
-                Profile
-              </Link>
-            </li>
-            <li>
-              <Link href="/user/portfolios" className="text-gray-700 hover:text-indigo-600 font-medium transition">
-                My Portfolios
-              </Link>
-            </li>
-            <li>
-              <Link href="/user/payments" className="text-gray-700 hover:text-indigo-600 font-medium transition">
-                Payments
-              </Link>
-            </li>
-            <li>
-              <Link href="/FeedbackForm" className="text-gray-700 hover:text-indigo-600 font-medium transition">
-                Submit Feedback
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <button
-          onClick={() => {
-            localStorage.removeItem('user');
-            setIsSignedIn(false);
-            window.location.href = '/login'; // Change '/login' to your actual login route if different
-          }}
-          className="mt-10 w-full py-2 rounded-md font-semibold transition bg-red-500 text-white hover:bg-red-600"
-        >
-          Logout
-        </button>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 p-8">
-        {/* Portfolios */}
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-semibold mb-6 text-blue-700">Your Portfolios</h2>
-          {portfolios.length === 0 ? (
-            <p className="text-gray-600">No portfolios found.</p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {portfolios.map((portfolio, idx) => (
-                <section key={portfolio._id || idx} className="bg-white p-6 rounded-md shadow-md">
-                  <p><strong>Resume File:</strong> {portfolio.resumeFile}</p>
-                  <p><strong>Website Code:</strong> {portfolio.websiteCode ? 'Available' : 'Not generated'}</p>
-                  <p><strong>Published:</strong> {portfolio.isPublished ? 'Yes' : 'No'}</p>
-                  <p><strong>Created At:</strong> {portfolio.createdAt ? new Date(portfolio.createdAt).toLocaleString() : 'N/A'}</p>
-                  <div className="flex gap-2 mt-4">
-                    <button
-                      onClick={() => {
-                        if (portfolio.websiteCode) {
-                          setCurrentCode(portfolio.websiteCode);
-                          setShowCodeModal(true);
-                        } else {
-                          window.alert('No code generated for this portfolio.');
-                        }
-                      }}
-                      className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-                    >
-                      View Code
-                    </button>
-                    <button
-                      onClick={async () => {
-                        const token = localStorage.getItem('user');
-                        try {
-                          await axios.put(
-                            `http://localhost:5500/api/portfolio/update-portfolio/${portfolio._id}`,
-                            { isPublished: !portfolio.isPublished },
-                            { headers: { 'x-auth-token': token } }
-                          );
-                          // Refresh portfolios after update
-                          const res = await axios.get('http://localhost:5500/api/portfolio/user-portfolios', {
-                            headers: { 'x-auth-token': token }
-                          });
-                          setPortfolios(res.data);
-                        } catch (err) {
-                          window.alert('Failed to update publish status.');
-                        }
-                      }}
-                      className={`py-2 px-4 rounded-md text-white ${portfolio.isPublished ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-green-500 hover:bg-green-600'}`}
-                    >
-                      {portfolio.isPublished ? 'Unpublish' : 'Publish'}
-                    </button>
-                  </div>
-                </section>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Modal for Viewing Code */}
-        {showCodeModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-            <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full p-6 relative">
-              <h3 className="text-lg font-bold mb-4">Portfolio HTML & CSS Code</h3>
-              <pre className="bg-gray-100 p-4 rounded overflow-x-auto max-h-96 text-xs">
-                {currentCode}
-              </pre>
-              <div className="flex justify-end gap-2 mt-4">
-                <button
-                  onClick={handleCopyCode}
-                  className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
-                >
-                  Copy to Clipboard
-                </button>
-                <button
-                  onClick={() => setShowCodeModal(false)}
-                  className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+      <DashboardNavbar />
+      <div className="flex">
+        {/* Sidebar */}
+        <aside className="w-72 bg-white shadow-lg p-8 flex flex-col justify-between">
+          <div>
+            <h2 className="text-3xl font-extrabold mb-10 text-indigo-700 tracking-tight">User Panel</h2>
+            <ul className="space-y-5">
+              <li>
+                <Link href="/" className="text-gray-700 hover:text-indigo-600 font-medium transition">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/portfolio" className="text-gray-700 hover:text-indigo-600 font-medium transition">
+                  My Portfolios
+                </Link>
+              </li>
+              <li>
+                <Link href="/user/builder" className="text-gray-700 hover:text-indigo-600 font-medium transition">
+                  Upload File
+                </Link>
+              </li>
+              <li>
+                <Link href="/FeedbackForm" className="text-gray-700 hover:text-indigo-600 font-medium transition">
+                  Submit Feedback
+                </Link>
+              </li>
+            </ul>
           </div>
-        )}
+          <button
+            onClick={() => {
+              localStorage.removeItem('user');
+              setIsSignedIn(false);
+              window.location.href = '/login'; // Change '/login' to your actual login route if different
+            }}
+            className="mt-10 w-full py-2 rounded-md font-semibold transition bg-red-500 text-white hover:bg-red-600"
+          >
+            Logout
+          </button>
+        </aside>
 
-        {/* History Section */}
-        <div className="max-w-4xl mx-auto mt-12">
-          <h2 className="text-xl font-semibold mb-4 text-blue-700">History</h2>
-          <div className="text-gray-700">
-            {history.length > 0 ? (
-              history.map((entry, index) => (
-                <div key={index} className="border-b py-2">
-                  <p>{entry.action} - <span className="text-gray-500">{entry.dateTime}</span></p>
-                </div>
-              ))
+        {/* Main Content */}
+        <main className="flex-1 p-8">
+          {/* Portfolios */}
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-2xl font-semibold mb-6 text-blue-700">Your Portfolios</h2>
+            {portfolios.length === 0 ? (
+              <p className="text-gray-600">No portfolios found.</p>
             ) : (
-              <p>No history available</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {portfolios.map((portfolio, idx) => (
+                  <section key={portfolio._id || idx} className="bg-white p-6 rounded-md shadow-md">
+                    <p><strong>Resume File:</strong> {portfolio.resumeFile}</p>
+                    <p><strong>Website Code:</strong> {portfolio.websiteCode ? 'Available' : 'Not generated'}</p>
+                    <p><strong>Published:</strong> {portfolio.isPublished ? 'Yes' : 'No'}</p>
+                    <p><strong>Created At:</strong> {portfolio.createdAt ? new Date(portfolio.createdAt).toLocaleString() : 'N/A'}</p>
+                    <div className="flex gap-2 mt-4">
+                      <button
+                        onClick={() => {
+                          if (portfolio.websiteCode) {
+                            setCurrentCode(portfolio.websiteCode);
+                            setShowCodeModal(true);
+                          } else {
+                            window.alert('No code generated for this portfolio.');
+                          }
+                        }}
+                        className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                      >
+                        View Code
+                      </button>
+                      <button
+                        onClick={async () => {
+                          const token = localStorage.getItem('user');
+                          try {
+                            await axios.put(
+                              `http://localhost:5500/api/portfolio/update-portfolio/${portfolio._id}`,
+                              { isPublished: !portfolio.isPublished },
+                              { headers: { 'x-auth-token': token }
+                            });
+                            // Refresh portfolios after update
+                            const res = await axios.get('http://localhost:5500/api/portfolio/user-portfolios', {
+                              headers: { 'x-auth-token': token }
+                            });
+                            setPortfolios(res.data);
+                          } catch (err) {
+                            window.alert('Failed to update publish status.');
+                          }
+                        }}
+                        className={`py-2 px-4 rounded-md text-white ${portfolio.isPublished ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-green-500 hover:bg-green-600'}`}
+                      >
+                        {portfolio.isPublished ? 'Unpublish' : 'Publish'}
+                      </button>
+                    </div>
+                  </section>
+                ))}
+              </div>
             )}
           </div>
-        </div>
 
-        {/* Payment Section */}
-        <div className="max-w-4xl mx-auto mt-12">
-          <h2 className="text-xl font-semibold mb-4 text-blue-700">Payment</h2>
-          <div className="text-gray-700">
-            <p>{paymentDetails ? `Payment details: ${paymentDetails}` : 'No payment details provided'}</p>
-            <button
-              onClick={handlePaymentChange}
-              className="mt-4 bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
-            >
-              Update Payment Details
-            </button>
-          </div>
-        </div>
-      </main>
+          {/* Modal for Viewing Code */}
+          {showCodeModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+              <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full p-6 relative">
+                <h3 className="text-lg font-bold mb-4">Portfolio HTML & CSS Code</h3>
+                <pre className="bg-gray-100 p-4 rounded overflow-x-auto max-h-96 text-xs">
+                  {currentCode}
+                </pre>
+                <div className="flex justify-end gap-2 mt-4">
+                  <button
+                    onClick={handleCopyCode}
+                    className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+                  >
+                    Copy to Clipboard
+                  </button>
+                  <button
+                    onClick={() => setShowCodeModal(false)}
+                    className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </main>
+      </div>
     </div>
   );
 };

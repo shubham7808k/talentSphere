@@ -30,7 +30,7 @@ const AdminLogin = () => {
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/admin/authenticate`, values);
         localStorage.setItem('adminToken', res.data.token);
         toast.success('Admin login successful');
-        router.push('/dashboard');
+        router.push('/admin/dashboard'); // <-- Redirect to admin dashboard
       } catch (err) {
         setShake(true);
         setTimeout(() => setShake(false), 500);
