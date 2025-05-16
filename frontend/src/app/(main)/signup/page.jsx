@@ -6,7 +6,7 @@ import { LineSpinner } from 'ldrs/react'
 import 'ldrs/react/LineSpinner.css'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import toast from 'react-hot-toast'
+import toast from 'react-hot-toast' 
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaEnvelope, FaLock, FaUser } from 'react-icons/fa'
@@ -68,7 +68,7 @@ const Signup = () => {
     <div
       className="min-h-screen w-full bg-gradient-to-br from-slate-100 to-blue-200 flex flex-col items-center justify-center overflow-hidden"
       style={{
-        backgroundImage: 'url("https://img.freepik.com/free-photo/abstract-minimal-concept-plant-shadows_23-2148835269.jpg?t=st=1742147754~exp=1742151354~hmac=5a3cfa9f5d79e011acc9f50075a5bba8b82d27668916380ebb235d2364375745&w=826")',
+        //backgroundImage: 'url("https://img.freepik.com/free-photo/abstract-minimal-concept-plant-shadows_23-2148835269.jpg?t=st=1742147754~exp=1742151354~hmac=5a3cfa9f5d79e011acc9f50075a5bba8b82d27668916380ebb235d2364375745&w=826")',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center'
