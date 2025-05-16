@@ -30,7 +30,7 @@ const Navbar = () => {
           <a href="#aboutus" className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">About us</a>
           <a href="#steps" className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Steps</a>
           <a href="#gallery" className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Gallery</a>
-          <a href="#contactUs" className="block md:inline-block hover:text-blue-500 px-3 py-3 md:border-none">Visit Us</a>
+
         </div>
         <div className="toggle w-full text-end hidden md:flex md:w-auto px-2 py-2 md:rounded">
           <a href="tel:+123">
