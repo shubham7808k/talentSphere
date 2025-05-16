@@ -31,7 +31,7 @@ const Home = () => {
                 href="/signup"
                 className="px-10 py-3 bg-[#c8a876] text-white font-medium rounded-full hover:bg-[#c09858]  transition duration-200"
               >
-                Signup
+                Get Started
               </a>
             </div>
           </div>

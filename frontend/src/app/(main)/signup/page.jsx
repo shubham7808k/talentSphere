@@ -68,7 +68,11 @@ const Signup = () => {
     <div
       className="min-h-screen w-full bg-gradient-to-br from-slate-100 to-blue-200 flex flex-col items-center justify-center overflow-hidden"
       style={{
+<<<<<<< HEAD
         //backgroundImage: 'url("https://img.freepik.com/free-photo/abstract-minimal-concept-plant-shadows_23-2148835269.jpg?t=st=1742147754~exp=1742151354~hmac=5a3cfa9f5d79e011acc9f50075a5bba8b82d27668916380ebb235d2364375745&w=826")',
+=======
+        backgroundImage: 'url("https://img.freepik.com/free-photo/blue-toned-pack-paper-sheets-with-copy-space_23-2148320442.jpg?semt=ais_hybrid&w=740")',
+>>>>>>> 880495a51962db0c960acb1c9acfb4bbd6070a79
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center'

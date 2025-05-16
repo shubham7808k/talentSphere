@@ -17,7 +17,7 @@ const Navbar = () => {
 
         {/* Desktop Nav Links */}
         <div className="hidden md:flex items-center space-x-6">
-          {["Home", "Services", "About us", "Steps", "Gallery", "Visit Us"].map(
+          {["Home", "Services", "About us", "Steps", "Gallery"].map(
             (label) => (
               <a
                 key={label}
