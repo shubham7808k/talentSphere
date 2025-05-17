@@ -111,6 +111,8 @@ const Dashboard = () => {
               onClick={() => {
                 axios.get('http://localhost:5500/api/admin/stats')
                   .then(res => setStats(res.data));
+                axios.get('http://localhost:5500/api/admin/users')
+                  .then(res => setUsers(res.data));
               }}
               className="px-6 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 font-semibold transition"
             >

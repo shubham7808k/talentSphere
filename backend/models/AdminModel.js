@@ -1,4 +1,4 @@
-// filepath: /Users/adarshyadav/Documents/talentSphere/backend/models/AdminModel.js
+
 const mongoose = require('mongoose');
 
 const AdminSchema = new mongoose.Schema({
