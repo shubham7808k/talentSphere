@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
+import Navbar from '../Navbar';
 
 const Dashboard = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -47,10 +48,11 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
-      <div className="flex flex-1">
+    <div className="fixed inset-0 flex flex-col bg-gradient-to-br from-blue-50 to-blue-100">
+      <Navbar onFeedbackClick={() => setShowFeedbackSection(true)} />
+      <div className="flex flex-1 min-h-0">
         {/* Sidebar */}
-        <aside className="w-72 bg-white shadow-lg p-8 flex flex-col justify-between">
+        <aside className="w-72 bg-white shadow-lg p-8 flex flex-col justify-between h-full">
           <div>
             <h2 className="text-3xl font-extrabold mb-10 text-indigo-700 tracking-tight">Admin Panel</h2>
             <ul className="space-y-5">
@@ -88,7 +90,7 @@ const Dashboard = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-4 md:p-10 overflow-y-auto h-full bg-transparent">
           {/* Header */}
           <header className="mb-10 text-center">
             <h1 className="text-4xl font-extrabold text-gray-800 mb-2">Admin Dashboard</h1>
@@ -109,6 +111,8 @@ const Dashboard = () => {
               onClick={() => {
                 axios.get('http://localhost:5500/api/admin/stats')
                   .then(res => setStats(res.data));
+                axios.get('http://localhost:5500/api/admin/users')
+                  .then(res => setUsers(res.data));
               }}
               className="px-6 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 font-semibold transition"
             >

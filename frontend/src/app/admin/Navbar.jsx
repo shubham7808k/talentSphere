@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-const Navbar = ({ onFeedbackClick }) => {
+const Navbar = ({ onFeedbackClick }) => { 
   return (
     <nav className="bg-gray-800 text-white px-6 py-4 shadow">
       <div className="flex justify-between items-center max-w-7xl mx-auto">

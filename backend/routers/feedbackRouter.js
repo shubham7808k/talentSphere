@@ -1,5 +1,5 @@
 const express = require('express');
-const Feedback = require('../models/feedbackModel').default;
+const Feedback = require('../models/FeedbackModel').default;
 const router = express.Router();
 
 // User submits feedback
