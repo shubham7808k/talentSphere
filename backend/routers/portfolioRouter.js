@@ -4,6 +4,20 @@ const verifyToken = require('../middlewares/verifyToken');
 
 const router = express.Router();
 
+// Function to generate portfolio HTML
+function generatePortfolioHTML(portfolioData) {
+  return `
+    <html>
+      <head><title>${portfolioData.name}'s Portfolio</title></head>
+      <body>
+        <h1>${portfolioData.name}</h1>
+        <p>Email: ${portfolioData.email}</p>
+        <!-- Add more fields as needed -->
+      </body>
+    </html>
+  `;
+}
+
 // Save a new portfolio (protected route)
 router.post('/save-portfolio', verifyToken, async (req, res) => {
   const token = req.header('x-auth-token');
@@ -11,23 +25,24 @@ router.post('/save-portfolio', verifyToken, async (req, res) => {
     return res.status(401).json({ msg: 'No token, authorization denied' });
   }
 
-  const { resumeFile, portfolioData, isPublished, template } = req.body;
-  const userId = req.user.id || req.user.userId || req.user._id; // adjust according to your JWT payload
-
   try {
+    const { resumeFile, ...portfolioData } = req.body;
+    const websiteCode = generatePortfolioHTML(portfolioData);
+    const userId = req.user.id || req.user.userId || req.user._id; // adjust according to your JWT payload
+
     const newPortfolio = new Portfolio({
-      userId,
+      ...portfolioData,
       resumeFile,
-      portfolioData,
-      template,
-      isPublished,
+      websiteCode,
+      userId,
+      isPublished: false,
     });
 
     const savedPortfolio = await newPortfolio.save();
     res.status(201).json(savedPortfolio);
-  } catch (error) {
-    console.error('Error saving portfolio:', error);
-    res.status(500).json({ message: 'Failed to save portfolio' });
+  } catch (err) {
+    console.error('Error saving portfolio:', err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

@@ -6,15 +6,10 @@ import DashboardNavbar from '@/components/DashboardNavbar';
 
 const Dashboard = () => {
   const [portfolios, setPortfolios] = useState([]);
-  const [history, setHistory] = useState([]);
-  const [paymentDetails, setPaymentDetails] = useState(null);
   const [isSignedIn, setIsSignedIn] = useState(true);
-
-  // Modal state
   const [showCodeModal, setShowCodeModal] = useState(false);
   const [currentCode, setCurrentCode] = useState('');
 
-  // Fetch all user portfolios on mount
   useEffect(() => {
     const token = localStorage.getItem('user');
     if (!token) {
@@ -22,7 +17,7 @@ const Dashboard = () => {
       setIsSignedIn(false);
       return;
     }
-    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/portfolio/user-portfolios`, {
+    axios.get('http://localhost:5500/api/portfolio/user-portfolios', {
       headers: { 'x-auth-token': token }
     })
     .then((response) => setPortfolios(response.data))
@@ -31,98 +26,10 @@ const Dashboard = () => {
     });
   }, []);
 
-  const handlePortfolioChange = () => {
-    const newPortfolio = {
-      name: prompt('Enter new portfolio name'),
-      email: prompt('Enter new email'),
-      phone: prompt('Enter new phone number'),
-      image: prompt('Enter new image URL'),
-    };
-
-    const dateTime = new Date().toLocaleString();
-    setHistory([
-      ...history,
-      { action: 'Portfolio updated', dateTime },
-    ]);
-  };
-
-  function generatePortfolioHTML(portfolioData) {
-    return `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>${portfolioData.name}'s Portfolio</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f9f9f9; color: #222; }
-    .container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 32px; }
-    h1 { color: #2563eb; }
-    ul { margin: 0 0 16px 20px; }
-    .section { margin-bottom: 24px; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>${portfolioData.name}</h1>
-    <div class="section"><strong>Email:</strong> ${portfolioData.email}</div>
-    <div class="section"><strong>Phone:</strong> ${portfolioData.phone}</div>
-    <div class="section"><strong>Skills:</strong>
-      <ul>
-        ${portfolioData.skills?.map(skill => `<li>${skill}</li>`).join('') || ''}
-      </ul>
-    </div>
-    <div class="section"><strong>Education:</strong>
-      <ul>
-        ${portfolioData.education?.map(edu => `<li>${edu}</li>`).join('') || ''}
-      </ul>
-    </div>
-    <div class="section"><strong>Experience:</strong>
-      <ul>
-        ${portfolioData.experience?.map(exp => `<li>${exp}</li>`).join('') || ''}
-      </ul>
-    </div>
-  </div>
-</body>
-</html>
-`;
-  }
-
-  const handleSavePortfolio = (portfolioData) => {
-    const websiteCode = generatePortfolioHTML(portfolioData);
-
-    const data = {
-      resumeFile: portfolioData.resumeFile,
-      websiteCode,
-      isPublished: false,
-    };
-
-    const token = localStorage.getItem('user');
-
-    axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/portfolio/save-portfolio`, data, {
-      headers: { 'x-auth-token': token }
-    })
-    .then((response) => {
-      // handle success
-      console.log('Portfolio saved:', response.data);
-      toast.success('Portfolio saved successfully!');
-      setPortfolios((prev) => [...prev, response.data]);
-    })
-    .catch((error) => {
-      // handle error
-      console.error('Error saving portfolio:', error.response?.data || error.message);
-      toast.error('Failed to save portfolio.');
-    });
-  };
-
-  const handlePaymentChange = () => {
-    const newPayment = prompt('Enter payment details');
-    setPaymentDetails(newPayment);
-    const dateTime = new Date().toLocaleString();
-    setHistory([
-      ...history,
-      { action: 'Payment details updated', dateTime },
-    ]);
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setIsSignedIn(false);
+    window.location.href = '/login';
   };
 
   const handleCopyCode = async () => {
@@ -136,20 +43,20 @@ const Dashboard = () => {
 
   if (!isSignedIn) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-200">
+      <div className="flex justify-center items-center h-screen bg-gradient-to-br from-blue-50 to-blue-100">
         <div className="bg-white p-10 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold">You have been signed out</h2>
+          <h2 className="text-2xl font-bold text-indigo-700">You have been signed out</h2>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <div className="fixed inset-0 flex flex-col bg-gradient-to-br from-blue-50 to-blue-100">
       <DashboardNavbar />
-      <div className="flex">
+      <div className="flex flex-1 min-h-0">
         {/* Sidebar */}
-        <aside className="w-72 bg-white shadow-lg p-8 flex flex-col justify-between">
+        <aside className="w-72 bg-white shadow-lg p-8 flex flex-col justify-between h-full">
           <div>
             <h2 className="text-3xl font-extrabold mb-10 text-indigo-700 tracking-tight">User Panel</h2>
             <ul className="space-y-5">
@@ -176,11 +83,7 @@ const Dashboard = () => {
             </ul>
           </div>
           <button
-            onClick={() => {
-              localStorage.removeItem('user');
-              setIsSignedIn(false);
-              window.location.href = '/login'; // Change '/login' to your actual login route if different
-            }}
+            onClick={handleLogout}
             className="mt-10 w-full py-2 rounded-md font-semibold transition bg-red-500 text-white hover:bg-red-600"
           >
             Logout
@@ -188,16 +91,19 @@ const Dashboard = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-8">
-          {/* Portfolios */}
+        <main className="flex-1 p-4 md:p-10 overflow-y-auto h-full bg-transparent">
+          <header className="mb-10 text-center">
+            <h1 className="text-4xl font-extrabold text-gray-800 mb-2">User Dashboard</h1>
+            <p className="text-gray-600 text-lg">Manage your portfolios and account here.</p>
+          </header>
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-2xl font-semibold mb-6 text-blue-700">Your Portfolios</h2>
+            <h2 className="text-2xl font-bold mb-8 text-blue-700">Your Portfolios</h2>
             {portfolios.length === 0 ? (
               <p className="text-gray-600">No portfolios found.</p>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {portfolios.map((portfolio, idx) => (
-                  <section key={portfolio._id || idx} className="bg-white p-6 rounded-md shadow-md">
+                  <section key={portfolio._id || idx} className="bg-white/90 p-6 rounded-xl shadow-lg border border-indigo-100">
                     <p><strong>Resume File:</strong> {portfolio.resumeFile}</p>
                     <p><strong>Website Code:</strong> {portfolio.websiteCode ? 'Available' : 'Not generated'}</p>
                     <p><strong>Published:</strong> {portfolio.isPublished ? 'Yes' : 'No'}</p>
@@ -221,12 +127,12 @@ const Dashboard = () => {
                           const token = localStorage.getItem('user');
                           try {
                             await axios.put(
-                              `${process.env.NEXT_PUBLIC_API_URL}/api/portfolio/update-portfolio/${portfolio._id}`,
+                              `http://localhost:5500/api/portfolio/update-portfolio/${portfolio._id}`,
                               { isPublished: !portfolio.isPublished },
                               { headers: { 'x-auth-token': token }
                             });
                             // Refresh portfolios after update
-                            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/portfolio/user-portfolios`, {
+                            const res = await axios.get('http://localhost:5500/api/portfolio/user-portfolios', {
                               headers: { 'x-auth-token': token }
                             });
                             setPortfolios(res.data);
@@ -249,7 +155,7 @@ const Dashboard = () => {
           {showCodeModal && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
               <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full p-6 relative">
-                <h3 className="text-lg font-bold mb-4">Portfolio HTML & CSS Code</h3>
+                <h3 className="text-lg font-bold mb-4 text-indigo-700">Portfolio HTML & CSS Code</h3>
                 <pre className="bg-gray-100 p-4 rounded overflow-x-auto max-h-96 text-xs">
                   {currentCode}
                 </pre>
@@ -270,7 +176,6 @@ const Dashboard = () => {
               </div>
             </div>
           )}
-
         </main>
       </div>
     </div>
