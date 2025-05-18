@@ -9,7 +9,7 @@ const pdf = require("pdf-parse");
 const fs = require("fs");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const UserRouter = require('./routers/userRouter');
+const UserRouter = require('./routers/UserRouter');
 const portfolioRouter = require('./routers/portfolioRouter');
 const feedbackRouter = require('./routers/feedbackRouter');
 const adminRouter = require('./routers/adminRouter');
