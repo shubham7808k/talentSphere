@@ -22,7 +22,7 @@ const Dashboard = () => {
       setIsSignedIn(false);
       return;
     }
-    axios.get(`${process.env.NEXT_PUBLIC_API_URL}`/api/portfolio/user-portfolios``, {
+    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/portfolio/user-portfolios`, {
       headers: { 'x-auth-token': token }
     })
     .then((response) => setPortfolios(response.data))
@@ -104,9 +104,14 @@ const Dashboard = () => {
     })
     .then((response) => {
       // handle success
+      console.log('Portfolio saved:', response.data);
+      toast.success('Portfolio saved successfully!');
+      setPortfolios((prev) => [...prev, response.data]);
     })
     .catch((error) => {
       // handle error
+      console.error('Error saving portfolio:', error.response?.data || error.message);
+      toast.error('Failed to save portfolio.');
     });
   };
 
