@@ -22,7 +22,7 @@ const Dashboard = () => {
       setIsSignedIn(false);
       return;
     }
-    axios.get('http://localhost:5500/api/portfolio/user-portfolios', {
+    axios.get(`${process.env.NEXT_PUBLIC_API_URL}`/api/portfolio/user-portfolios``, {
       headers: { 'x-auth-token': token }
     })
     .then((response) => setPortfolios(response.data))
@@ -99,7 +99,7 @@ const Dashboard = () => {
 
     const token = localStorage.getItem('user');
 
-    axios.post('http://localhost:5500/api/portfolio/save-portfolio', data, {
+    axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/portfolio/save-portfolio`, data, {
       headers: { 'x-auth-token': token }
     })
     .then((response) => {
@@ -216,12 +216,12 @@ const Dashboard = () => {
                           const token = localStorage.getItem('user');
                           try {
                             await axios.put(
-                              `http://localhost:5500/api/portfolio/update-portfolio/${portfolio._id}`,
+                              `${process.env.NEXT_PUBLIC_API_URL}/api/portfolio/update-portfolio/${portfolio._id}`,
                               { isPublished: !portfolio.isPublished },
                               { headers: { 'x-auth-token': token }
                             });
                             // Refresh portfolios after update
-                            const res = await axios.get('http://localhost:5500/api/portfolio/user-portfolios', {
+                            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/portfolio/user-portfolios`, {
                               headers: { 'x-auth-token': token }
                             });
                             setPortfolios(res.data);

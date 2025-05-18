@@ -16,16 +16,16 @@ const Dashboard = () => {
   const [showFeedbackSection, setShowFeedbackSection] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:5500/api/feedback')
+    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/feedback`)
       .then(res => setFeedbacks(res.data))
       .catch(() => setFeedbacks([]));
     setIsSignedIn(!!localStorage.getItem('user'));
 
-    axios.get('http://localhost:5500/api/admin/stats')
+    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/stats`)
       .then(res => setStats(res.data))
       .catch(() => setStats({ totalUsers: 0, filesUploaded: 0, activePortfolios: 0 }));
 
-    axios.get('http://localhost:5500/api/admin/users')
+    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/users`)
       .then(res => setUsers(res.data))
       .catch(() => setUsers([]));
   }, []);
@@ -109,9 +109,9 @@ const Dashboard = () => {
           <div className="flex justify-center mb-12">
             <button
               onClick={() => {
-                axios.get('http://localhost:5500/api/admin/stats')
+                axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/stats`)
                   .then(res => setStats(res.data));
-                axios.get('http://localhost:5500/api/admin/users')
+                axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/users`)
                   .then(res => setUsers(res.data));
               }}
               className="px-6 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 font-semibold transition"

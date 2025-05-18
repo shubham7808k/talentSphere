@@ -58,7 +58,7 @@ const PortfolioBuilder = () => {
     formData.append('pdf', file);
 
     axios
-      .post('http://localhost:5500/upload-pdf', formData, {
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/upload-pdf`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -92,7 +92,7 @@ const PortfolioBuilder = () => {
 
     axios
       .post(
-        'http://localhost:5500/api/portfolio/save-portfolio',
+        `${process.env.NEXT_PUBLIC_API_URL}/api/portfolio/save-portfolio`,
         {
           resumeFile: file.name, // or the path/url after upload
           portfolioData,

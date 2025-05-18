@@ -21,7 +21,7 @@ const FeedbackForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5500/api/feedback', formData);
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/feedback`, formData);
       alert('Feedback submitted!');
       setFormData({ name: '', email: '', rating: '', message: '' });
     } catch {
